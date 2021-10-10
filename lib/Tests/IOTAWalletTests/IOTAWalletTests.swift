@@ -73,7 +73,6 @@ final class IOTAWalletTests: XCTestCase {
     }
     
     func testMultipleGetAccount() {
-        let expectation = XCTestExpectation(description: "Get account")
         let accountManager = IOTAAccountManager(storagePath: storagePath)
         accountManager.setStrongholdPassword(password)
         accountManager.storeMnemonic(mnemonic: mnemonic, signer: .stronghold)
