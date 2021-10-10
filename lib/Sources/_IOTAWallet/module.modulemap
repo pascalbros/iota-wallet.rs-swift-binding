@@ -1,0 +1,4 @@
+module _IOTAWallet {
+    header "WalletPrivate.h"
+    link "_IOTAWallet"
+}
