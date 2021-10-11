@@ -17,3 +17,7 @@ struct WalletGenericResponse: Decodable {
     var isError: Bool { type == "Error" }
 }
 
+struct WalletSyncResponse: Decodable {
+    let id: String
+    var addresses: [IOTAAccount.Address]
+}

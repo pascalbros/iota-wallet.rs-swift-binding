@@ -25,15 +25,15 @@ public enum SignerType: String {
     case stronghold = "Stronghold"
 }
 
-public struct IOTAAccount: Decodable {
+public class IOTAAccount: Decodable {
     
     public struct Address: Decodable {
-        let address: String
-        let balance: Int
-        let keyIndex: Int
+        public let address: String
+        public let balance: Int
+        public let keyIndex: Int
     }
     
-    let id: String
-    let alias: String
-    let addresses: [Address]
+    public let id: String
+    public let alias: String
+    public internal(set) var addresses: [Address]
 }

@@ -22,6 +22,18 @@ public class IOTAAccountManager {
         }
     }
     
+    func generateMnemonic(onResult: @escaping (Result<String, IOTAResponseError>) -> Void) {
+        WalletEventsManager.shared.sendCommand(id: "GenerateMnemonic",
+                                               cmd: "GenerateMnemonic",
+                                               payload: nil) { result in
+            if let response = WalletResponse<String>.decode(result)?.payload {
+                onResult(.success(response))
+            } else {
+                onResult(.failure(IOTAResponseError.decode(from: result)))
+            }
+        }
+    }
+    
     func storeMnemonic(mnemonic: String, signer: SignerType, onResult: ((Result<Bool, IOTAResponseError>) -> Void)? = nil) {
         WalletEventsManager.shared.sendCommand(id: "StoreMnemonic",
                                                cmd: "StoreMnemonic",

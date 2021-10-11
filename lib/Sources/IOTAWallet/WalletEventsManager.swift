@@ -14,6 +14,7 @@ class WalletEventsManager {
     
     fileprivate(set) var isRunning: Bool = false
     fileprivate var callbacks = WalletEventsManagerCallbacks()
+    fileprivate var hasBeenStarted = false
     
     var identifier = "events-manager"//WalletUtils.randomString(length: 8)
     private init() {
@@ -21,8 +22,9 @@ class WalletEventsManager {
     }
     
     func start(storagePath: String = URL.libraryDirectory.path) {
-        guard !isRunning else { return }
-        debugPrint(storagePath)
+        if isRunning {
+            stop()
+        }
         iota_initialize({ pointer in
             guard let ref = callbacksRef(id: "events-manager") else { return }
             guard let item = pointer?.stringValue else { return }
@@ -42,9 +44,10 @@ class WalletEventsManager {
         guard isRunning else { return }
         iota_destroy(Constants.defaultActorName.pointerValue)
         flushCommands()
+        isRunning = false
     }
     
-    func sendCommand(id: String, cmd: String, payload: Any, callback: @escaping ((String) -> Void)) {
+    func sendCommand(id: String, cmd: String, payload: Any?, callback: @escaping ((String) -> Void)) {
         guard isRunning else { return }
         let currentId = WalletUtils.randomId(to: id)
         guard let json = ["actorId": "my-actor", "id": currentId, "cmd": cmd, "payload": payload].json else {
