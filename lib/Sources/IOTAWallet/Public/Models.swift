@@ -27,10 +27,14 @@ public enum SignerType: String {
 
 public class IOTAAccount: Decodable {
     
-    public struct Address: Decodable {
+    public struct Address: Decodable, Hashable {
         public let address: String
         public let balance: Int
         public let keyIndex: Int
+        
+        public static func == (lhs: Address, rhs: Address) -> Bool {
+            return lhs.address == rhs.address
+        }
     }
     
     public let id: String

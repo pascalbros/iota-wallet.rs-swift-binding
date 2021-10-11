@@ -19,7 +19,9 @@ extension IOTAAccount {
                                                cmd: "CallAccountMethod",
                                                payload: ["accountId": id, "method": ["name": "GenerateAddress"]]) { [weak self] result in
             if let address = WalletResponse<IOTAAccount.Address>.decode(result)?.payload {
-                self?.addresses.append(address)
+                if !(self?.addresses.contains(address) ?? true) {
+                    self?.addresses.append(address)
+                }
                 onResult?(.success(address))
             } else {
                 onResult?(.failure(IOTAResponseError.decode(from: result)))
@@ -38,4 +40,21 @@ extension IOTAAccount {
             }
         }
     }
+    
+    //    public func generateAddresses(amount: Int, onResult: ((Result<[IOTAAccount.Address], IOTAResponseError>) -> Void)?) {
+    //        WalletEventsManager.shared.sendCommand(id: "GenerateAddresses",
+    //                                               cmd: "GenerateAddresses",
+    //                                               payload: ["accountId": id, "method": ["name": "GenerateAddresses", "data": ["amount": amount]]]) { [weak self] result in
+    //            guard let sself = self else { onResult?(.failure(.unknown)); return }
+    //            if let addresses = WalletResponse<[IOTAAccount.Address]>.decode(result)?.payload {
+    //                let newAddresses = Set(addresses)
+    //                let myAddresses = Set(sself.addresses)
+    //                let toAdd = newAddresses.subtracting(myAddresses).sorted(by: { $0.keyIndex < $1.keyIndex })
+    //                sself.addresses.append(contentsOf: toAdd)
+    //                onResult?(.success(addresses))
+    //            } else {
+    //                onResult?(.failure(IOTAResponseError.decode(from: result)))
+    //            }
+    //        }
+    //    }
 }
