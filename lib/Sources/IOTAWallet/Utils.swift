@@ -7,7 +7,7 @@ class WalletUtils {
     }
     
     static func randomId(to: String) -> String {
-        to+"-"+randomString(length: 6)
+        to+"-"+randomString(length: 4)
     }
 }
 

@@ -15,42 +15,53 @@ class WalletEventsManager {
     fileprivate(set) var isRunning: Bool = false
     fileprivate var callbacks = WalletEventsManagerCallbacks()
     fileprivate var hasBeenStarted = false
+    fileprivate(set) var storagePath: String = URL.libraryDirectory.path
+    fileprivate(set) var identifier: String
     
-    var identifier = "events-manager"//WalletUtils.randomString(length: 8)
-    private init() {
+    init() {
+        identifier = WalletEventsManager.generateId(path: storagePath)
+    }
+    
+    fileprivate func setup() {
+        identifier = WalletEventsManager.generateId(path: storagePath)
         walletsCallbacks[identifier] = callbacks
     }
     
+    static func generateId(path: String) -> String { String("\(path.hashValue)".suffix(8)) }
+    
     func start(storagePath: String = URL.libraryDirectory.path) {
+        if isRunning && storagePath == self.storagePath && FileManager.default.fileExists(atPath: storagePath) { return }
         if isRunning {
             stop()
         }
+        setup()
         iota_initialize({ pointer in
-            guard let ref = callbacksRef(id: "events-manager") else { return }
             guard let item = pointer?.stringValue else { return }
             log(item)
             guard let decoded = item.decodedResponse else { return }
+            let refId = decoded.id.suffix(8)
+            guard let ref = callbacksRef(id: String(refId)) else { return }
             guard !decoded.id.isEmpty else { return }
             guard let callback = ref.callbacks[decoded.id] else { return }
             DispatchQueue.main.async {
                 callback(item)
             }
             ref.callbacks[decoded.id] = nil
-        }, Constants.defaultActorName.pointerValue, storagePath.pointerValue)
+        }, identifier.pointerValue, storagePath.pointerValue)
         isRunning = true
     }
     
     func stop() {
         guard isRunning else { return }
-        iota_destroy(Constants.defaultActorName.pointerValue)
+        iota_destroy(identifier.pointerValue)
         flushCommands()
         isRunning = false
     }
     
     func sendCommand(id: String, cmd: String, payload: Any?, callback: @escaping ((String) -> Void)) {
         guard isRunning else { return }
-        let currentId = WalletUtils.randomId(to: id)
-        guard let json = ["actorId": "my-actor", "id": currentId, "cmd": cmd, "payload": payload].json else {
+        let currentId = WalletUtils.randomId(to: id)+identifier
+        guard let json = ["actorId": identifier, "id": currentId, "cmd": cmd, "payload": payload].json else {
             callback("{\"error\": \"serialization-error\"}")
             return
         }
@@ -60,6 +71,7 @@ class WalletEventsManager {
     
     func flushCommands() {
         callbacks.callbacks.removeAll()
+        walletsCallbacks[identifier] = nil
     }
 }
 
