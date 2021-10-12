@@ -1,3 +1,0 @@
-# IOTAWallet
-
-IOTAWallet Swift binding.

@@ -14,4 +14,10 @@ wallet.log
 /.idea
 alice-database
 
-
+/.build
+/Packages
+/*.xcodeproj
+/xcuserdata/
+/DerivedData/
+/.swiftpm
+/IOTAWalletInternal.xcframework/
