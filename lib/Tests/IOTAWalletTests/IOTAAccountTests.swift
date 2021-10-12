@@ -3,20 +3,23 @@ import XCTest
 
 final class IOTAAccountTests: XCTestCase {
     
+    var currentAccountManager: IOTAAccountManager?
+    
     override class func setUp() {
         try? FileManager.default.removeItem(atPath: storagePath)
     }
     
-    override class func tearDown() {
-        try? FileManager.default.removeItem(atPath: storagePath)
-    }
-    
     override func tearDown() {
-        try? FileManager.default.removeItem(atPath: storagePath)
+        Thread.sleep(forTimeInterval: 0.1)
+        self.currentAccountManager?.closeConnection()
+        Thread.sleep(forTimeInterval: 0.5)
+        self.currentAccountManager?.deleteStorage()
+        self.currentAccountManager = nil
     }
     
     func newAccountPreamble(onResult: @escaping (IOTAAccount) -> Void) {
         let accountManager = IOTAAccountManager(storagePath: storagePath)
+        currentAccountManager = accountManager
         accountManager.setStrongholdPassword(password)
         accountManager.storeMnemonic(mnemonic: mnemonic, signer: .stronghold)
         accountManager.getAccount(alias: alias) { result in
@@ -52,6 +55,7 @@ final class IOTAAccountTests: XCTestCase {
         Thread.sleep(forTimeInterval: 1.0)
         let expectation = XCTestExpectation(description: "Generate address")
         newAccountPreamble { account in
+            print(account.addresses)
             account.generateAddress { addressResponse in
                 switch addressResponse {
                 case .success(let result): XCTAssertEqual(result.address, "atoi1qqrch87kr45t763ml0z99930tkgkhv9f8nt0xhumgzg97suqg557g9efuut")

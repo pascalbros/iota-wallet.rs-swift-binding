@@ -3,22 +3,29 @@ import XCTest
 
 final class IOTAAccountManagerTests: XCTestCase {
     
+    var currentAccountManager: IOTAAccountManager?
+    
     override class func setUp() {
         try? FileManager.default.removeItem(atPath: storagePath)
     }
-    
-    override class func tearDown() {
-        try? FileManager.default.removeItem(atPath: storagePath)
-    }
-    
+
+//    override class func tearDown() {
+//        try? FileManager.default.removeItem(atPath: storagePath)
+//    }
+
     override func tearDown() {
-        try? FileManager.default.removeItem(atPath: storagePath)
+        Thread.sleep(forTimeInterval: 0.1)
+        self.currentAccountManager?.closeConnection()
+        Thread.sleep(forTimeInterval: 0.5)
+        self.currentAccountManager?.deleteStorage()
+        self.currentAccountManager = nil
     }
     
     func testStrongholdPassword() {
         Thread.sleep(forTimeInterval: 1.0)
         let expectation = XCTestExpectation(description: "Set stronghold password")
         let accountManager = IOTAAccountManager(storagePath: storagePath)
+        currentAccountManager = accountManager
         accountManager.setStrongholdPassword(password) { result in
             switch result {
             case .success(let response): print(response); break
@@ -33,6 +40,7 @@ final class IOTAAccountManagerTests: XCTestCase {
         Thread.sleep(forTimeInterval: 1.0)
         let expectation = XCTestExpectation(description: "Generate mnemonic")
         let accountManager = IOTAAccountManager(storagePath: storagePath)
+        currentAccountManager = accountManager
         accountManager.generateMnemonic { result in
             switch result {
             case .success(let response): print(response); break
@@ -40,6 +48,7 @@ final class IOTAAccountManagerTests: XCTestCase {
             }
             expectation.fulfill()
         }
+        currentAccountManager = accountManager
         wait(for: [expectation], timeout: 3.0)
     }
     
@@ -47,6 +56,7 @@ final class IOTAAccountManagerTests: XCTestCase {
         Thread.sleep(forTimeInterval: 1.0)
         let expectation = XCTestExpectation(description: "Create new account")
         let accountManager = IOTAAccountManager(storagePath: storagePath)
+        currentAccountManager = accountManager
         accountManager.setStrongholdPassword(password)
         accountManager.storeMnemonic(mnemonic: mnemonic, signer: .stronghold)
         accountManager.createAccount(alias: alias, url: nodeUrl, localPow: true)
@@ -56,6 +66,7 @@ final class IOTAAccountManagerTests: XCTestCase {
             case .success: XCTFail("Error: authenticated with a wrong password")
             }
         }
+        currentAccountManager = accountManager
         wait(for: [expectation], timeout: 3.0)
     }
     
@@ -63,6 +74,7 @@ final class IOTAAccountManagerTests: XCTestCase {
         Thread.sleep(forTimeInterval: 1.0)
         let expectation = XCTestExpectation(description: "Create new account")
         let accountManager = IOTAAccountManager(storagePath: storagePath)
+        currentAccountManager = accountManager
         accountManager.setStrongholdPassword(password)
         accountManager.storeMnemonic(mnemonic: mnemonic, signer: .stronghold)
         accountManager.createAccount(alias: alias, url: nodeUrl, localPow: true) { result in
@@ -81,6 +93,7 @@ final class IOTAAccountManagerTests: XCTestCase {
         Thread.sleep(forTimeInterval: 1.0)
         let expectation = XCTestExpectation(description: "Get account")
         let accountManager = IOTAAccountManager(storagePath: storagePath)
+        currentAccountManager = accountManager
         accountManager.setStrongholdPassword(password)
         accountManager.storeMnemonic(mnemonic: mnemonic, signer: .stronghold)
         accountManager.createAccount(alias: alias, url: nodeUrl, localPow: true)
@@ -93,6 +106,22 @@ final class IOTAAccountManagerTests: XCTestCase {
             }
             expectation.fulfill()
         }
+        currentAccountManager = accountManager
         wait(for: [expectation], timeout: 3.0)
+    }
+    
+    func testDeleteStorage() {
+        Thread.sleep(forTimeInterval: 1.0)
+        let expectation = XCTestExpectation(description: "Get account")
+        let accountManager = IOTAAccountManager(storagePath: storagePath)
+        currentAccountManager = accountManager
+        accountManager.setStrongholdPassword(password)
+        accountManager.storeMnemonic(mnemonic: mnemonic, signer: .stronghold)
+        accountManager.deleteStorage()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            expectation.fulfill()
+        }
+        currentAccountManager = accountManager
+        //wait(for: [expectation], timeout: 3.0)
     }
 }

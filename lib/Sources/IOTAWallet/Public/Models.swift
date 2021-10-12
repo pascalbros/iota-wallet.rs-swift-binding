@@ -36,10 +36,14 @@ public class IOTAAccount: Decodable {
             return lhs.address == rhs.address
         }
     }
-    
+    weak var accountManager: IOTAAccountManager?
     public let id: String
     public let alias: String
     public internal(set) var addresses: [Address]
+    
+    private enum CodingKeys: String, CodingKey {
+        case id, alias, addresses
+    }
 }
 
 public struct BalanceResponse: Decodable {
