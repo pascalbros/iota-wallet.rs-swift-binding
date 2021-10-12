@@ -78,6 +78,36 @@ final class IOTAAccountTests: XCTestCase {
         wait(for: [expectation], timeout: 3.0)
     }
     
+    func testGetBalance() {
+        Thread.sleep(forTimeInterval: 1.0)
+        let expectation = XCTestExpectation(description: "Get Balance")
+        newAccountPreamble { account in
+            account.balance { balance in
+                switch balance {
+                case .success(let result): print(result)
+                case .failure(let error): XCTFail(error.payload.error)
+                }
+                expectation.fulfill()
+            }
+        }
+        wait(for: [expectation], timeout: 3.0)
+    }
+    
+    func testNodeInfo() {
+        Thread.sleep(forTimeInterval: 1.0)
+        let expectation = XCTestExpectation(description: "Node info")
+        newAccountPreamble { account in
+            account.nodeInfo(url: nodeUrl) { balance in
+                switch balance {
+                case .success(let result): print(result)
+                case .failure(let error): XCTFail(error.payload.error)
+                }
+                expectation.fulfill()
+            }
+        }
+        wait(for: [expectation], timeout: 3.0)
+    }
+    
 //    func testGenerateAddresses() {
 //        Thread.sleep(forTimeInterval: 1.0)
 //        let expectation = XCTestExpectation(description: "Generate addresses")

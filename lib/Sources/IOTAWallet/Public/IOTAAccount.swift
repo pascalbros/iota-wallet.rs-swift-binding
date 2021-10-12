@@ -41,6 +41,30 @@ extension IOTAAccount {
         }
     }
     
+    public func balance(onResult: ((Result<BalanceResponse, IOTAResponseError>) -> Void)?) {
+        WalletEventsManager.shared.sendCommand(id: "GetBalance",
+                                               cmd: "CallAccountMethod",
+                                               payload: ["accountId": id, "method": ["name": "GetBalance"]]) { result in
+            if let balance = WalletResponse<BalanceResponse>.decode(result)?.payload {
+                onResult?(.success(balance))
+            } else {
+                onResult?(.failure(IOTAResponseError.decode(from: result)))
+            }
+        }
+    }
+    
+    public func nodeInfo(url: String, jwt: String = "", username: String = "", password: String = "", onResult: ((Result<NodeInfoResponse, IOTAResponseError>) -> Void)?) {
+        WalletEventsManager.shared.sendCommand(id: "GetNodeInfo",
+                                               cmd: "CallAccountMethod",
+                                               payload: ["accountId": id, "method": ["name": "GetNodeInfo", "data": [url, jwt, [username, password]]]]) { result in
+            if let nodeInfo = WalletResponse<NodeInfoResponse>.decode(result)?.payload {
+                onResult?(.success(nodeInfo))
+            } else {
+                onResult?(.failure(IOTAResponseError.decode(from: result)))
+            }
+        }
+    }
+    
     //    public func generateAddresses(amount: Int, onResult: ((Result<[IOTAAccount.Address], IOTAResponseError>) -> Void)?) {
     //        WalletEventsManager.shared.sendCommand(id: "GenerateAddresses",
     //                                               cmd: "GenerateAddresses",

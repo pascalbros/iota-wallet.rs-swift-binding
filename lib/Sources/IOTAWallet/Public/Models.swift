@@ -41,3 +41,31 @@ public class IOTAAccount: Decodable {
     public let alias: String
     public internal(set) var addresses: [Address]
 }
+
+public struct BalanceResponse: Decodable {
+    public let total: Int
+    public let available: Int
+    public let incoming: Int
+    public let outgoing: Int
+}
+
+public struct NodeInfoResponse: Decodable {
+    public let nodeinfo: NodeInfo
+    public let url: String
+}
+
+public struct NodeInfo: Decodable {
+    public let name: String
+    public let version: String
+    public let isHealthy: Bool
+    public let networkId: String
+    public let minPoWScore: Int
+    public let messagesPerSecond: Double
+    public let referencedMessagesPerSecond: Double
+    public let referencedRate: Double
+    public let latestMilestoneTimestamp: Int
+    public let latestMilestoneIndex: Int
+    public let confirmedMilestoneIndex: Int
+    public let pruningIndex: Int
+    public let features: [String]
+}
