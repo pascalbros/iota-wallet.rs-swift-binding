@@ -110,18 +110,34 @@ final class IOTAAccountManagerTests: XCTestCase {
         wait(for: [expectation], timeout: 3.0)
     }
     
+    func testRemoveAccount() {
+        Thread.sleep(forTimeInterval: 1.0)
+        let expectation = XCTestExpectation(description: "Delete storage")
+        let accountManager = IOTAAccountManager(storagePath: storagePath)
+        currentAccountManager = accountManager
+        accountManager.setStrongholdPassword(password)
+        accountManager.storeMnemonic(mnemonic: mnemonic, signer: .stronghold)
+        accountManager.createAccount(alias: alias, url: nodeUrl, localPow: true)
+        accountManager.removeAccount(alias: alias) { result in
+            switch result {
+            case .success(let response):
+                print(response)
+            case .failure(let error):
+                XCTFail(error.payload.error)
+            }
+            expectation.fulfill()
+        }
+        currentAccountManager = accountManager
+        wait(for: [expectation], timeout: 3.0)
+    }
+    
     func testDeleteStorage() {
         Thread.sleep(forTimeInterval: 1.0)
-        let expectation = XCTestExpectation(description: "Get account")
         let accountManager = IOTAAccountManager(storagePath: storagePath)
         currentAccountManager = accountManager
         accountManager.setStrongholdPassword(password)
         accountManager.storeMnemonic(mnemonic: mnemonic, signer: .stronghold)
         accountManager.deleteStorage()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            expectation.fulfill()
-        }
         currentAccountManager = accountManager
-        //wait(for: [expectation], timeout: 3.0)
     }
 }
