@@ -1,0 +1,17 @@
+IOTAWalletInternal.xcframework/macos-arm64/IOTAWalletInternal.framework filter=lfs diff=lfs merge=lfs -text
+IOTAWalletInternal.xcframework/macos-arm64/IOTAWalletInternal.framework/Headers/IOTAWalletInternal.h filter=lfs diff=lfs merge=lfs -text
+IOTAWalletInternal.xcframework/macos-arm64/IOTAWalletInternal.framework/IOTAWalletInternal filter=lfs diff=lfs merge=lfs -text
+IOTAWalletInternal.xcframework/macos-arm64/IOTAWalletInternal.framework/Modules/Modules.modulemap filter=lfs diff=lfs merge=lfs -text
+IOTAWalletInternal.xcframework/ios-arm64 filter=lfs diff=lfs merge=lfs -text
+IOTAWalletInternal.xcframework/ios-arm64/IOTAWalletInternal.framework/Modules filter=lfs diff=lfs merge=lfs -text
+IOTAWalletInternal.xcframework/ios-arm64/IOTAWalletInternal.framework/Info.plist filter=lfs diff=lfs merge=lfs -text
+IOTAWalletInternal.xcframework/ios-arm64/IOTAWalletInternal.framework/Modules/Modules.modulemap filter=lfs diff=lfs merge=lfs -text
+IOTAWalletInternal.xcframework/macos-arm64 filter=lfs diff=lfs merge=lfs -text
+IOTAWalletInternal.xcframework/macos-arm64/IOTAWalletInternal.framework/Headers filter=lfs diff=lfs merge=lfs -text
+IOTAWalletInternal.xcframework/macos-arm64/IOTAWalletInternal.framework/Modules filter=lfs diff=lfs merge=lfs -text
+IOTAWalletInternal.xcframework/Info.plist filter=lfs diff=lfs merge=lfs -text
+IOTAWalletInternal.xcframework/ios-arm64/IOTAWalletInternal.framework filter=lfs diff=lfs merge=lfs -text
+IOTAWalletInternal.xcframework/ios-arm64/IOTAWalletInternal.framework/Headers filter=lfs diff=lfs merge=lfs -text
+IOTAWalletInternal.xcframework/ios-arm64/IOTAWalletInternal.framework/Headers/IOTAWalletInternal.h filter=lfs diff=lfs merge=lfs -text
+IOTAWalletInternal.xcframework/ios-arm64/IOTAWalletInternal.framework/IOTAWalletInternal filter=lfs diff=lfs merge=lfs -text
+IOTAWalletInternal.xcframework/macos-arm64/IOTAWalletInternal.framework/Info.plist filter=lfs diff=lfs merge=lfs -text
