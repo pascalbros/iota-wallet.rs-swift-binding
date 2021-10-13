@@ -27,7 +27,9 @@ let package = Package(
             linkerSettings: [LinkerSetting.linkedFramework("Security"), LinkerSetting.linkedLibrary("c++")]),
         .binaryTarget(
             name: "IOTAWalletInternal",
-            path: "IOTAWalletInternal.xcframework"),
+            url: "https://www.dropbox.com/s/k5ny8ishldjg39b/IOTAWalletInternal.zip?dl=1",
+            checksum: "72f5194bbc17fe4a7cbc0cadcdca4d9b7a3caa76ef3fbc1dd1598e66fd35cbd0"
+        ),
         .testTarget(
             name: "IOTAWalletTests",
             dependencies: ["IOTAWallet"]),
