@@ -20,3 +20,4 @@ alice-database
 /xcuserdata/
 /DerivedData/
 /.swiftpm
+/IOTAWalletInternals.xcframework/
