@@ -27,8 +27,8 @@ let package = Package(
             linkerSettings: [LinkerSetting.linkedFramework("Security"), LinkerSetting.linkedLibrary("c++")]),
         .binaryTarget(
             name: "IOTAWalletInternal",
-            url: "https://www.dropbox.com/s/k5ny8ishldjg39b/IOTAWalletInternal.zip?dl=1",
-            checksum: "72f5194bbc17fe4a7cbc0cadcdca4d9b7a3caa76ef3fbc1dd1598e66fd35cbd0"
+            url: "https://www.dropbox.com/s/9ymz5jqrqa1v2al/IOTAWalletInternal.zip?dl=1",
+            checksum: "49f2bdab18e251f59c41f47022902aaad052fe0cdcc962f8f876075e742d39d8"
         ),
         .testTarget(
             name: "IOTAWalletTests",
