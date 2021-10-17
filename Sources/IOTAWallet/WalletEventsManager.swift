@@ -1,5 +1,7 @@
 import Foundation
+#if canImport(_IOTAWallet)
 import _IOTAWallet
+#endif
 
 private var walletsCallbacks: [String: WalletEventsManagerCallbacks] = Dictionary()
 

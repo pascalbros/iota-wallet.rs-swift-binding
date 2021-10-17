@@ -13,7 +13,7 @@ class WalletUtils {
 
 func log(_ items: Any..., level: LogLevel = .debug) {
     #if DEBUG
-    if level.rawValue >= IOTAWallet.debugLevel.rawValue {
+    if level.rawValue >= IOTAWalletConfig.debugLevel.rawValue {
         debugPrint("[IOTAWallet] ", items)
     }
     #endif
