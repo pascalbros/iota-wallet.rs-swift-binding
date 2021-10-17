@@ -63,6 +63,8 @@ tee -a target/universal/$FRAMEWORK_NAME.xcframework/Info.plist > /dev/null <<EOT
 			</array>
 			<key>SupportedPlatform</key>
 			<string>ios</string>
+			<key>SupportedPlatformVariant</key>
+			<string>simulator</string>
 		</dict>
 	</array>
 	<key>CFBundlePackageType</key>
