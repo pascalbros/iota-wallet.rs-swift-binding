@@ -1,3 +1,3 @@
 public struct IOTAWalletConfig {
-    static var debugLevel: LogLevel = .debug
+    public static var debugLevel: LogLevel = .debug
 }
