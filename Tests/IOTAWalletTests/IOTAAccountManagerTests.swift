@@ -28,7 +28,7 @@ final class IOTAAccountManagerTests: XCTestCase {
         currentAccountManager = accountManager
         accountManager.setStrongholdPassword(password) { result in
             switch result {
-            case .success(let response): print(response); break
+            case .success(let response): print(response)
             case .failure(let error): XCTFail(error.localizedDescription)
             }
             expectation.fulfill()
@@ -87,7 +87,7 @@ final class IOTAAccountManagerTests: XCTestCase {
         currentAccountManager = accountManager
         accountManager.lockStronghold() { result in
             switch result {
-            case .success(let response): print(response); break
+            case .success(let response): print(response)
             case .failure(let error): XCTFail(error.localizedDescription)
             }
             expectation.fulfill()
@@ -102,7 +102,7 @@ final class IOTAAccountManagerTests: XCTestCase {
         currentAccountManager = accountManager
         accountManager.generateMnemonic { result in
             switch result {
-            case .success(let response): print(response); break
+            case .success(let response): print(response)
             case .failure(let error): XCTFail(error.localizedDescription)
             }
             expectation.fulfill()
@@ -223,6 +223,59 @@ final class IOTAAccountManagerTests: XCTestCase {
             case .failure(_): expectation.fulfill()
             }
         }
+        wait(for: [expectation], timeout: 3.0)
+    }
+    
+    func testSetStrongholdClearPasswordInterval() {
+        let expectation = XCTestExpectation(description: "Set stronghold password interval")
+        let accountManager = IOTAAccountManager(storagePath: storagePath)
+        currentAccountManager = accountManager
+        accountManager.setStrongholdPassword(password)
+        accountManager.setStrongholdPasswordClearInterval(10) { result in
+            switch result {
+            case .success(let response): print(response)
+            case .failure(let error): XCTFail(error.localizedDescription)
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 100.0)
+    }
+    
+    func testGetAccounts() {
+        let expectation = XCTestExpectation(description: "Get account")
+        let accountManager = IOTAAccountManager(storagePath: storagePath)
+        currentAccountManager = accountManager
+        accountManager.setStrongholdPassword(password)
+        accountManager.storeMnemonic(mnemonic: mnemonic, signer: .stronghold)
+        accountManager.createAccount(alias: alias, mnemonic: mnemonic, url: nodeUrl, localPow: true)
+        accountManager.getAccounts() { result in
+            switch result {
+            case .success(let response):
+                print(response)
+            case .failure(let error):
+                XCTFail(error.payload.error)
+            }
+            expectation.fulfill()
+        }
+        currentAccountManager = accountManager
+        wait(for: [expectation], timeout: 3.0)
+    }
+    
+    func testBackup() {
+        let expectation = XCTestExpectation(description: "Backup")
+        let accountManager = IOTAAccountManager(storagePath: storagePath)
+        currentAccountManager = accountManager
+        accountManager.setStrongholdPassword(password)
+        accountManager.storeMnemonic(mnemonic: mnemonic, signer: .stronghold)
+        accountManager.createAccount(alias: alias, mnemonic: mnemonic, url: nodeUrl, localPow: true)
+        accountManager.backup(destination: storagePath+"/backup.stronghold", password: password) { result in
+            switch result {
+            case .success(let response): print(response)
+            case .failure(let error): XCTFail(error.payload.error)
+            }
+            expectation.fulfill()
+        }
+        currentAccountManager = accountManager
         wait(for: [expectation], timeout: 3.0)
     }
 }

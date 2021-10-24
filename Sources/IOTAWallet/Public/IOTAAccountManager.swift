@@ -68,6 +68,18 @@ public class IOTAAccountManager {
         }
     }
     
+    public func setStrongholdPasswordClearInterval(_ interval: Int, onResult: ((Result<Bool, IOTAResponseError>) -> Void)? = nil) {
+        walletManager?.sendCommand(id: "SetStrongholdPasswordClearInterval",
+                                   cmd: "SetStrongholdPasswordClearInterval",
+                                   payload: [
+                                    "secs": interval,
+                                    "nanos": 0
+                                   ]) { result in
+            let isError = result.decodedResponse?.isError ?? false
+            onResult?(isError ? .failure(IOTAResponseError.decode(from: result)) : .success(true))
+        }
+    }
+    
     public func generateMnemonic(onResult: @escaping (Result<String, IOTAResponseError>) -> Void) {
         walletManager?.sendCommand(id: "GenerateMnemonic",
                                    cmd: "GenerateMnemonic",
@@ -98,10 +110,10 @@ public class IOTAAccountManager {
         }
     }
     
-    public func createAccount(alias: String, url: String, localPow: Bool, onResult: ((Result<IOTAAccount, IOTAResponseError>) -> Void)? = nil) {
+    public func createAccount(alias: String, mnemonic: String? = nil, url: String, localPow: Bool, onResult: ((Result<IOTAAccount, IOTAResponseError>) -> Void)? = nil) {
         walletManager?.sendCommand(id: "CreateAccount",
                                    cmd: "CreateAccount",
-                                   payload: ["alias": alias, "clientOptions": ["node": ["url": url]], "localPow": localPow]) { result in
+                                   payload: ["alias": alias, "mnemonic": mnemonic as Any, "clientOptions": ["node": ["url": url]], "localPow": localPow]) { result in
             if let account = WalletResponse<IOTAAccount>.decode(result)?.payload {
                 account.accountManager = self
                 onResult?(.success(account))
@@ -149,6 +161,32 @@ public class IOTAAccountManager {
             } else {
                 onResult?(.failure(IOTAResponseError.decode(from: result)))
             }
+        }
+    }
+    
+    public func getAccounts(onResult: ((Result<[IOTAAccount], IOTAResponseError>) -> Void)? = nil) {
+        walletManager?.sendCommand(id: "GetAccounts",
+                                   cmd: "GetAccounts",
+                                   payload: nil) { result in
+            if let accounts = WalletResponse<[IOTAAccount]>.decode(result)?.payload {
+                accounts.forEach({ $0.accountManager = self })
+                onResult?(.success(accounts))
+            } else {
+                onResult?(.failure(IOTAResponseError.decode(from: result)))
+            }
+        }
+    }
+    
+    public func backup(destination: String, password: String, onResult: ((Result<Bool, IOTAResponseError>) -> Void)? = nil) {
+        guard destination.hasSuffix(".stronghold") else {
+            onResult?(.failure(IOTAResponseError(type: "InvalidName", payload: IOTAResponseError.Details(type: "InvalidName", error: "Invalid destination name, expected a .stronghold file output"))))
+            return
+        }
+        walletManager?.sendCommand(id: "Backup",
+                                   cmd: "Backup",
+                                   payload: ["destination": destination, "password": password]) { result in
+            let isError = result.decodedResponse?.isError ?? false
+            onResult?(isError ? .failure(IOTAResponseError.decode(from: result)) : .success(true))
         }
     }
 }
