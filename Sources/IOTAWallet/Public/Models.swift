@@ -73,3 +73,21 @@ public struct NodeInfo: Decodable {
     public let pruningIndex: Int
     public let features: [String]
 }
+
+public struct StrongholdStatus: Decodable {
+    //"[IOTAWallet] " ["{\"id\":\"GetStrongholdStatus-z6l496281856\",\"type\":\"StrongholdStatus\",\"payload\":{\"snapshotPath\":\"/Users/pasquale.ambrosini/tmpIOTAWallet/wallet.stronghold\",\"snapshot\":{\"status\":\"Unlocked\",\"data\":{\"secs\":0,\"nanos\":0}}},\"action\":\"GetStrongholdStatus\"}"]
+    public struct Snapshot: Decodable {
+        public enum Status: String, Decodable {
+            case locked = "Locked"
+            case unlocked = "Unlocked"
+        }
+        public struct Data: Decodable {
+            public let secs: Int
+            public let nanos: Int
+        }
+        public let status: Status
+        public let data: Data?
+    }
+    public let snapshotPath: String
+    public let snapshot: Snapshot
+}

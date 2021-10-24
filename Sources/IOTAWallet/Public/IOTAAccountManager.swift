@@ -35,6 +35,39 @@ public class IOTAAccountManager {
         }
     }
     
+    public func changeStrongholdPassword(currentPassword: String, newPassword: String, onResult: ((Result<Bool, IOTAResponseError>) -> Void)? = nil) {
+        walletManager?.sendCommand(id: "ChangeStrongholdPassword",
+                                   cmd: "ChangeStrongholdPassword",
+                                   payload: [
+                                    "currentPassword": currentPassword,
+                                    "newPassword": newPassword]) { result in
+            let isError = result.decodedResponse?.isError ?? false
+            onResult?(isError ? .failure(IOTAResponseError.decode(from: result)) : .success(true))
+        }
+    }
+    
+    public func strongholdStatus(onResult: ((Result<StrongholdStatus, IOTAResponseError>) -> Void)? = nil) {
+        walletManager?.sendCommand(id: "GetStrongholdStatus",
+                                   cmd: "GetStrongholdStatus",
+                                   payload: nil) { result in
+            guard let onResult = onResult else { return }
+            if let response = WalletResponse<StrongholdStatus>.decode(result)?.payload {
+                onResult(.success(response))
+            } else {
+                onResult(.failure(IOTAResponseError.decode(from: result)))
+            }
+        }
+    }
+    
+    public func lockStronghold(onResult: ((Result<Bool, IOTAResponseError>) -> Void)? = nil) {
+        walletManager?.sendCommand(id: "LockStronghold",
+                                   cmd: "LockStronghold",
+                                   payload: nil) { result in
+            let isError = result.decodedResponse?.isError ?? false
+            onResult?(isError ? .failure(IOTAResponseError.decode(from: result)) : .success(true))
+        }
+    }
+    
     public func generateMnemonic(onResult: @escaping (Result<String, IOTAResponseError>) -> Void) {
         walletManager?.sendCommand(id: "GenerateMnemonic",
                                    cmd: "GenerateMnemonic",
@@ -51,6 +84,15 @@ public class IOTAAccountManager {
         walletManager?.sendCommand(id: "StoreMnemonic",
                                    cmd: "StoreMnemonic",
                                    payload: ["mnemonic": mnemonic, "signerType": ["type": signer.rawValue]]) { result in
+            let isError = result.decodedResponse?.isError ?? false
+            onResult?(isError ? .failure(IOTAResponseError.decode(from: result)) : .success(true))
+        }
+    }
+    
+    public func verifyMnemonic(mnemonic: String, onResult: ((Result<Bool, IOTAResponseError>) -> Void)? = nil) {
+        walletManager?.sendCommand(id: "VerifyMnemonic",
+                                   cmd: "VerifyMnemonic",
+                                   payload: mnemonic) { result in
             let isError = result.decodedResponse?.isError ?? false
             onResult?(isError ? .failure(IOTAResponseError.decode(from: result)) : .success(true))
         }
@@ -99,11 +141,11 @@ public class IOTAAccountManager {
             onResult?(.success(true))
             return
         }
-        walletManager?.sendCommand(id: "GetAccount",
+        walletManager?.sendCommand(id: "DeleteStorage",
                                    cmd: "DeleteStorage",
                                    payload: nil) { result in
-            if let account = WalletResponse<Bool>.decode(result)?.payload {
-                onResult?(.success(account))
+            if let response = WalletResponse<Bool>.decode(result)?.payload {
+                onResult?(.success(response))
             } else {
                 onResult?(.failure(IOTAResponseError.decode(from: result)))
             }

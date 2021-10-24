@@ -36,6 +36,65 @@ final class IOTAAccountManagerTests: XCTestCase {
         wait(for: [expectation], timeout: 2.0)
     }
     
+    func testChangeStrongholdPassword() {
+        let expectation = XCTestExpectation(description: "Change stronghold password")
+        let accountManager = IOTAAccountManager(storagePath: storagePath)
+        currentAccountManager = accountManager
+        accountManager.setStrongholdPassword(password)
+        accountManager.changeStrongholdPassword(currentPassword: password, newPassword: password+"2") { result in
+            switch result {
+            case .success(_): expectation.fulfill()
+            case .failure(let error): XCTFail(error.localizedDescription)
+            }
+        }
+        wait(for: [expectation], timeout: 2.0)
+    }
+    
+    func testChangeWrongStrongholdPassword() {
+        let expectation = XCTestExpectation(description: "Change wrong stronghold password")
+        let accountManager = IOTAAccountManager(storagePath: storagePath)
+        currentAccountManager = accountManager
+        accountManager.setStrongholdPassword(password)
+        accountManager.changeStrongholdPassword(currentPassword: password+"2", newPassword: password) { result in
+            switch result {
+            case .success(_): XCTFail("The new password should raise an error, accepted instead")
+            case .failure(_): expectation.fulfill()
+            }
+        }
+        wait(for: [expectation], timeout: 2.0)
+    }
+    
+    func testGetStrongholdStatus() {
+        let expectation = XCTestExpectation(description: "Get stronghold status")
+        let accountManager = IOTAAccountManager(storagePath: storagePath)
+        currentAccountManager = accountManager
+        accountManager.setStrongholdPassword(password)
+        Thread.sleep(forTimeInterval: 2.0)
+        accountManager.strongholdStatus() { result in
+            switch result {
+            case .success(let response): print(response)
+            case .failure(let error): XCTFail(error.localizedDescription)
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 5.0)
+    }
+    
+    func testLockStronghold() {
+        let expectation = XCTestExpectation(description: "Lock stronghold")
+        let accountManager = IOTAAccountManager(storagePath: storagePath)
+        accountManager.setStrongholdPassword(password)
+        currentAccountManager = accountManager
+        accountManager.lockStronghold() { result in
+            switch result {
+            case .success(let response): print(response); break
+            case .failure(let error): XCTFail(error.localizedDescription)
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 2.0)
+    }
+    
     func testGenerateMnemonic() {
         Thread.sleep(forTimeInterval: 1.0)
         let expectation = XCTestExpectation(description: "Generate mnemonic")
@@ -139,5 +198,31 @@ final class IOTAAccountManagerTests: XCTestCase {
         accountManager.storeMnemonic(mnemonic: mnemonic, signer: .stronghold)
         accountManager.deleteStorage()
         currentAccountManager = accountManager
+    }
+    
+    func testVerifyMnemonic() {
+        let expectation = XCTestExpectation(description: "Test verify mnemonic")
+        let accountManager = IOTAAccountManager(storagePath: storagePath)
+        currentAccountManager = accountManager
+        accountManager.verifyMnemonic(mnemonic: mnemonic) { result in
+            switch result {
+            case .success(_): expectation.fulfill()
+            case .failure(let error): XCTFail(error.localizedDescription)
+            }
+        }
+        wait(for: [expectation], timeout: 3.0)
+    }
+    
+    func testVerifyWrongMnemonic() {
+        let expectation = XCTestExpectation(description: "Test verify wrong mnemonic")
+        let accountManager = IOTAAccountManager(storagePath: storagePath)
+        currentAccountManager = accountManager
+        accountManager.verifyMnemonic(mnemonic: mnemonic + " diesel") { result in
+            switch result {
+            case .success(_): XCTFail("The mnemonic should raise an error, accepted instead")
+            case .failure(_): expectation.fulfill()
+            }
+        }
+        wait(for: [expectation], timeout: 3.0)
     }
 }
