@@ -189,4 +189,17 @@ public class IOTAAccountManager {
             onResult?(isError ? .failure(IOTAResponseError.decode(from: result)) : .success(true))
         }
     }
+    
+    public func restoreBackup(source: String, password: String, onResult: ((Result<Bool, IOTAResponseError>) -> Void)? = nil) {
+        guard source.hasSuffix(".stronghold") else {
+            onResult?(.failure(IOTAResponseError(type: "InvalidName", payload: IOTAResponseError.Details(type: "InvalidName", error: "Invalid destination name, expected a .stronghold file output"))))
+            return
+        }
+        walletManager?.sendCommand(id: "RestoreBackup",
+                                   cmd: "RestoreBackup",
+                                   payload: ["backupPath": source, "password": password]) { result in
+            let isError = result.decodedResponse?.isError ?? false
+            onResult?(isError ? .failure(IOTAResponseError.decode(from: result)) : .success(true))
+        }
+    }
 }

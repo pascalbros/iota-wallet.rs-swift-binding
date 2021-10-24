@@ -278,4 +278,20 @@ final class IOTAAccountManagerTests: XCTestCase {
         currentAccountManager = accountManager
         wait(for: [expectation], timeout: 3.0)
     }
+    
+//    func testRestoreBackup() {
+//        let expectation = XCTestExpectation(description: "Backup")
+//        let accountManager = IOTAAccountManager(storagePath: storagePath)
+//        currentAccountManager = accountManager
+//        accountManager.setStrongholdPassword(password)
+//        accountManager.restoreBackup(source: "/Users/<USER>/Desktop/backup.stronghold", password: password) { result in
+//            switch result {
+//            case .success(let response): print(response)
+//            case .failure(let error): XCTFail(error.payload.error)
+//            }
+//            expectation.fulfill()
+//        }
+//        currentAccountManager = accountManager
+//        wait(for: [expectation], timeout: 5.0)
+//    }
 }
