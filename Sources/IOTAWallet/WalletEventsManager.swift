@@ -10,6 +10,20 @@ private class WalletEventsManagerCallbacks {
     init() { }
 }
 
+func onMessage(_ pointer: UnsafePointer<CChar>?) {
+    guard let item = pointer?.stringValue else { return }
+    log(item)
+    guard let decoded = item.decodedResponse else { return }
+    let refId = decoded.id.suffix(8)
+    guard let ref = callbacksRef(id: String(refId)) else { return }
+    guard !decoded.id.isEmpty else { return }
+    guard let callback = ref.callbacks[decoded.id] else { return }
+    DispatchQueue.main.async {
+        callback(item)
+    }
+    ref.callbacks[decoded.id] = nil
+}
+
 class WalletEventsManager {
     
     static let shared = WalletEventsManager()
@@ -37,19 +51,7 @@ class WalletEventsManager {
             stop()
         }
         setup()
-        iota_initialize({ pointer in
-            guard let item = pointer?.stringValue else { return }
-            log(item)
-            guard let decoded = item.decodedResponse else { return }
-            let refId = decoded.id.suffix(8)
-            guard let ref = callbacksRef(id: String(refId)) else { return }
-            guard !decoded.id.isEmpty else { return }
-            guard let callback = ref.callbacks[decoded.id] else { return }
-            DispatchQueue.main.async {
-                callback(item)
-            }
-            ref.callbacks[decoded.id] = nil
-        }, identifier.pointerValue, storagePath.pointerValue)
+        iota_initialize(onMessage(_:), identifier.pointerValue, storagePath.pointerValue)
         isRunning = true
     }
     

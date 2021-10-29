@@ -202,4 +202,25 @@ public class IOTAAccountManager {
             onResult?(isError ? .failure(IOTAResponseError.decode(from: result)) : .success(true))
         }
     }
+    
+    public func startBackgroundSync(pollingInterval: Int, automaticOutputConsolidation: Bool, onResult: ((Result<Bool, IOTAResponseError>) -> Void)? = nil) {
+        walletManager?.sendCommand(id: "StartBackgroundSync",
+                                   cmd: "StartBackgroundSync",
+                                   payload: [
+                                    "pollingInterval": WalletDuration(secs: pollingInterval, nanos: 0).dict,
+                                    "automaticOutputConsolidation": automaticOutputConsolidation
+                                   ]) { result in
+            let isError = result.decodedResponse?.isError ?? false
+            onResult?(isError ? .failure(IOTAResponseError.decode(from: result)) : .success(true))
+        }
+    }
+    
+    public func stopBackgroundSync(onResult: ((Result<Bool, IOTAResponseError>) -> Void)? = nil) {
+        walletManager?.sendCommand(id: "StopBackgroundSync",
+                                   cmd: "StopBackgroundSync",
+                                   payload: nil) { result in
+            let isError = result.decodedResponse?.isError ?? false
+            onResult?(isError ? .failure(IOTAResponseError.decode(from: result)) : .success(true))
+        }
+    }
 }

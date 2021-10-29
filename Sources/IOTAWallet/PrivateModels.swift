@@ -21,3 +21,9 @@ struct WalletSyncResponse: Decodable {
     let id: String
     var addresses: [IOTAAccount.Address]
 }
+
+struct WalletDuration: Codable {
+    let secs: Int
+    let nanos: Int
+    var dict: [String: Int] { ["secs": secs, "nanos": nanos] }
+}

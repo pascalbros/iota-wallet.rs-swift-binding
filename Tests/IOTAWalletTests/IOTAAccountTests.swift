@@ -26,7 +26,7 @@ final class IOTAAccountTests: XCTestCase {
             if let account = try? result.get() {
                 onResult(account)
             } else {
-                accountManager.createAccount(alias: alias, url: nodeUrl, localPow: true) { result in
+                accountManager.createAccount(alias: alias, mnemonic: mnemonic, url: nodeUrl, localPow: true) { result in
                     switch result {
                     case .success(let account): onResult(account)
                     case .failure(let error): XCTFail(error.payload.error)

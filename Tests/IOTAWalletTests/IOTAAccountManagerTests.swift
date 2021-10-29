@@ -14,11 +14,14 @@ final class IOTAAccountManagerTests: XCTestCase {
 //    }
 
     override func tearDown() {
+        self.currentAccountManager?.stopBackgroundSync()
         Thread.sleep(forTimeInterval: 0.1)
+        self.currentAccountManager?.deleteStorage()
+        Thread.sleep(forTimeInterval: 0.2)
         self.currentAccountManager?.closeConnection()
         Thread.sleep(forTimeInterval: 0.5)
-        self.currentAccountManager?.deleteStorage()
         self.currentAccountManager = nil
+        try? FileManager.default.removeItem(atPath: storagePath)
     }
     
     func testStrongholdPassword() {
@@ -107,13 +110,12 @@ final class IOTAAccountManagerTests: XCTestCase {
             }
             expectation.fulfill()
         }
-        currentAccountManager = accountManager
         wait(for: [expectation], timeout: 3.0)
     }
     
     func testWrongStrongholdPassword() {
         Thread.sleep(forTimeInterval: 1.0)
-        let expectation = XCTestExpectation(description: "Create new account")
+        let expectation = XCTestExpectation(description: "Wrong stronghold password")
         let accountManager = IOTAAccountManager(storagePath: storagePath)
         currentAccountManager = accountManager
         accountManager.setStrongholdPassword(password)
@@ -125,7 +127,6 @@ final class IOTAAccountManagerTests: XCTestCase {
             case .success: XCTFail("Error: authenticated with a wrong password")
             }
         }
-        currentAccountManager = accountManager
         wait(for: [expectation], timeout: 3.0)
     }
     
@@ -165,7 +166,6 @@ final class IOTAAccountManagerTests: XCTestCase {
             }
             expectation.fulfill()
         }
-        currentAccountManager = accountManager
         wait(for: [expectation], timeout: 3.0)
     }
     
@@ -186,7 +186,6 @@ final class IOTAAccountManagerTests: XCTestCase {
             }
             expectation.fulfill()
         }
-        currentAccountManager = accountManager
         wait(for: [expectation], timeout: 3.0)
     }
     
@@ -197,7 +196,6 @@ final class IOTAAccountManagerTests: XCTestCase {
         accountManager.setStrongholdPassword(password)
         accountManager.storeMnemonic(mnemonic: mnemonic, signer: .stronghold)
         accountManager.deleteStorage()
-        currentAccountManager = accountManager
     }
     
     func testVerifyMnemonic() {
@@ -257,7 +255,6 @@ final class IOTAAccountManagerTests: XCTestCase {
             }
             expectation.fulfill()
         }
-        currentAccountManager = accountManager
         wait(for: [expectation], timeout: 3.0)
     }
     
@@ -275,7 +272,38 @@ final class IOTAAccountManagerTests: XCTestCase {
             }
             expectation.fulfill()
         }
+        wait(for: [expectation], timeout: 3.0)
+    }
+    
+    func testStartBackgroundSync() {
+        let expectation = XCTestExpectation(description: "Start Background Sync")
+        let accountManager = IOTAAccountManager(storagePath: storagePath)
         currentAccountManager = accountManager
+        accountManager.setStrongholdPassword(password)
+        accountManager.storeMnemonic(mnemonic: mnemonic, signer: .stronghold)
+        accountManager.startBackgroundSync(pollingInterval: 10, automaticOutputConsolidation: true) { result in
+            switch result {
+            case .success(let response): print(response)
+            case .failure(let error): XCTFail(error.payload.error)
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 3.0)
+    }
+    
+    func testStopBackgroundSync() {
+        let expectation = XCTestExpectation(description: "Stop Background Sync")
+        let accountManager = IOTAAccountManager(storagePath: storagePath)
+        currentAccountManager = accountManager
+        accountManager.setStrongholdPassword(password)
+        accountManager.storeMnemonic(mnemonic: mnemonic, signer: .stronghold)
+        accountManager.stopBackgroundSync { result in
+            switch result {
+            case .success(let response): print(response)
+            case .failure(let error): XCTFail(error.payload.error)
+            }
+            expectation.fulfill()
+        }
         wait(for: [expectation], timeout: 3.0)
     }
     
