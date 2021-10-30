@@ -31,11 +31,22 @@ public class IOTAAccount: Decodable {
         public let address: String
         public let balance: Int
         public let keyIndex: Int
+        public let outputs: [String: AddressOutput]?
         
         public static func == (lhs: Address, rhs: Address) -> Bool {
             return lhs.address == rhs.address
         }
     }
+    
+    public struct AddressOutput: Decodable, Hashable {
+        public let transactionId: String
+        public let messageId: String
+        public let index: Int
+        public let amount: Int
+        public let kind: String
+        public let isSpent: Bool?
+    }
+    
     weak var accountManager: IOTAAccountManager?
     public let id: String
     public let alias: String

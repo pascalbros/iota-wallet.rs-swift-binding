@@ -126,4 +126,70 @@ final class IOTAAccountTests: XCTestCase {
         }
         wait(for: [expectation], timeout: 3.0)
     }
+    
+    func testGetAddresses() {
+        Thread.sleep(forTimeInterval: 1.0)
+        let expectation = XCTestExpectation(description: "Get addresses")
+        newAccountPreamble { account in
+            account.sync(onResult: { _ in })
+            Thread.sleep(forTimeInterval: 2.0)
+            account.addresses { addressResponse in
+                switch addressResponse {
+                case .success(let result): XCTAssertGreaterThan(result.count, 0)
+                case .failure(let error): XCTFail(error.payload.error)
+                }
+                expectation.fulfill()
+            }
+        }
+        wait(for: [expectation], timeout: 5.0)
+    }
+    
+    func testGetUnspentAddresses() {
+        Thread.sleep(forTimeInterval: 1.0)
+        let expectation = XCTestExpectation(description: "Get unspent addresses")
+        newAccountPreamble { account in
+            account.sync(onResult: { _ in })
+            Thread.sleep(forTimeInterval: 2.0)
+            account.unspentAddresses { addressResponse in
+                switch addressResponse {
+                case .success(let result): XCTAssertGreaterThan(result.count, 0)
+                case .failure(let error): XCTFail(error.payload.error)
+                }
+                expectation.fulfill()
+            }
+        }
+        wait(for: [expectation], timeout: 5.0)
+    }
+    
+    func testGetSpentAddresses() {
+        Thread.sleep(forTimeInterval: 1.0)
+        let expectation = XCTestExpectation(description: "Get spent addresses")
+        newAccountPreamble { account in
+            account.sync(onResult: { _ in })
+            Thread.sleep(forTimeInterval: 2.0)
+            account.spentAddresses { addressResponse in
+                switch addressResponse {
+                case .success(let result): print(result)
+                case .failure(let error): XCTFail(error.payload.error)
+                }
+                expectation.fulfill()
+            }
+        }
+        wait(for: [expectation], timeout: 5.0)
+    }
+    
+    func testGetUnusedAddresses() {
+        Thread.sleep(forTimeInterval: 1.0)
+        let expectation = XCTestExpectation(description: "Get unused address")
+        newAccountPreamble { account in
+            account.unusedAddress { addressResponse in
+                switch addressResponse {
+                case .success(let result): print(result ?? "No address")
+                case .failure(let error): XCTFail(error.payload.error)
+                }
+                expectation.fulfill()
+            }
+        }
+        wait(for: [expectation], timeout: 5.0)
+    }
 }

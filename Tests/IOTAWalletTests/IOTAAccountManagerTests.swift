@@ -58,7 +58,7 @@ final class IOTAAccountManagerTests: XCTestCase {
         let accountManager = IOTAAccountManager(storagePath: storagePath)
         currentAccountManager = accountManager
         accountManager.setStrongholdPassword(password)
-        accountManager.changeStrongholdPassword(currentPassword: password+"2", newPassword: password) { result in
+        accountManager.changeStrongholdPassword(currentPassword: password+"3", newPassword: password) { result in
             switch result {
             case .success(_): XCTFail("The new password should raise an error, accepted instead")
             case .failure(_): expectation.fulfill()

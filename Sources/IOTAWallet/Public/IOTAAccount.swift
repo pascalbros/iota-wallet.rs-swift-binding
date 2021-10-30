@@ -77,4 +77,60 @@ extension IOTAAccount {
             onResult?(isError ? .failure(IOTAResponseError.decode(from: result)) : .success(true))
         }
     }
+    
+    public func addresses(onResult: ((Result<[Address], IOTAResponseError>) -> Void)?) {
+        accountManager?.walletManager?.sendCommand(id: "ListAddresses",
+                                                   cmd: "CallAccountMethod",
+                                                   payload: ["accountId": id,
+                                                             "method": ["name": "ListAddresses"]
+                                                            ]) { result in
+            if let addresses = WalletResponse<[Address]>.decode(result)?.payload {
+                onResult?(.success(addresses))
+            } else {
+                onResult?(.failure(IOTAResponseError.decode(from: result)))
+            }
+        }
+    }
+    
+    public func unspentAddresses(onResult: ((Result<[Address], IOTAResponseError>) -> Void)?) {
+        accountManager?.walletManager?.sendCommand(id: "ListAddresses",
+                                                   cmd: "CallAccountMethod",
+                                                   payload: ["accountId": id,
+                                                             "method": ["name": "ListUnspentAddresses"]
+                                                            ]) { result in
+            if let addresses = WalletResponse<[Address]>.decode(result)?.payload {
+                onResult?(.success(addresses))
+            } else {
+                onResult?(.failure(IOTAResponseError.decode(from: result)))
+            }
+        }
+    }
+    
+    public func spentAddresses(onResult: ((Result<[Address], IOTAResponseError>) -> Void)?) {
+        accountManager?.walletManager?.sendCommand(id: "ListAddresses",
+                                                   cmd: "CallAccountMethod",
+                                                   payload: ["accountId": id,
+                                                             "method": ["name": "ListSpentAddresses"]
+                                                            ]) { result in
+            if let addresses = WalletResponse<[Address]>.decode(result)?.payload {
+                onResult?(.success(addresses))
+            } else {
+                onResult?(.failure(IOTAResponseError.decode(from: result)))
+            }
+        }
+    }
+    
+    public func unusedAddress(onResult: ((Result<Address?, IOTAResponseError>) -> Void)?) {
+        accountManager?.walletManager?.sendCommand(id: "ListAddresses",
+                                                   cmd: "CallAccountMethod",
+                                                   payload: ["accountId": id,
+                                                             "method": ["name": "GetUnusedAddress"]
+                                                            ]) { result in
+            if result.decodedResponse?.isError ?? false {
+                onResult?(.failure(IOTAResponseError.decode(from: result)))
+                return
+            }
+            onResult?(.success(WalletResponse<Address>.decode(result)?.payload))
+        }
+    }
 }
