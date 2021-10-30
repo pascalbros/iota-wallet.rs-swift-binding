@@ -17,6 +17,7 @@ public class IOTAAccountManager {
     }
     
     public func start() {
+        if walletManager?.isRunning ?? false { return }
         walletManager = WalletEventsManager()
         walletManager?.start(storagePath: self.storagePath)
     }
