@@ -1,7 +1,8 @@
+#if canImport(Concurrency)
 import Foundation
+import Concurrency
 
-#if os(iOS)
-@available(iOS 15.0.0, *)
+@available(iOS 15.0.0, macOS 12.0.0, *)
 public extension IOTAAccountManager {
     
     func setStrongholdPassword(_ password: String) async -> Result<Bool, IOTAResponseError> {
