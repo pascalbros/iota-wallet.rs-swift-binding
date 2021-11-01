@@ -28,7 +28,10 @@ extension IOTAAccount {
         })
     }
 
-    func nodeInfo(url: String, jwt: String = "", username: String = "", password: String = "") async -> Result<NodeInfoResponse, IOTAResponseError> {
+    func nodeInfo(url: String,
+                  jwt: String = "",
+                  username: String = "",
+                  password: String = "") async -> Result<NodeInfoResponse, IOTAResponseError> {
         await withCheckedContinuation({ sself in
             nodeInfo(url: url, jwt: jwt, username: username, password: password) { sself.resume(returning: $0) }
         })

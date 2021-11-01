@@ -46,7 +46,8 @@ class WalletEventsManager {
     static func generateId(path: String) -> String { String("\(path.hashValue)".suffix(8)) }
     
     func start(storagePath: String = URL.libraryDirectory.path) {
-        if isRunning && storagePath == self.storagePath && FileManager.default.fileExists(atPath: storagePath) { return }
+        if isRunning && storagePath == self.storagePath &&
+            FileManager.default.fileExists(atPath: storagePath) { return }
         if isRunning {
             stop()
         }
@@ -64,7 +65,7 @@ class WalletEventsManager {
     
     func sendCommand(id: String, cmd: String, payload: Any?, callback: @escaping ((String) -> Void)) {
         guard isRunning else { return }
-        let currentId = WalletUtils.randomId(to: id)+identifier
+        let currentId = WalletUtils.randomId(from: id)+identifier
         guard let json = ["actorId": identifier, "id": currentId, "cmd": cmd, "payload": payload].json else {
             callback("{\"error\": \"serialization-error\"}")
             return

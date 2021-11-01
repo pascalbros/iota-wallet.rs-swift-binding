@@ -27,7 +27,8 @@ public class IOTAAccountManager {
         walletManager = nil
     }
     
-    public func setStrongholdPassword(_ password: String, onResult: ((Result<Bool, IOTAResponseError>) -> Void)? = nil) {
+    public func setStrongholdPassword(_ password: String,
+                                      onResult: ((Result<Bool, IOTAResponseError>) -> Void)? = nil) {
         walletManager?.sendCommand(id: "SetStrongholdPassword",
                                    cmd: "SetStrongholdPassword",
                                    payload: password) { result in
@@ -36,7 +37,9 @@ public class IOTAAccountManager {
         }
     }
     
-    public func changeStrongholdPassword(currentPassword: String, newPassword: String, onResult: ((Result<Bool, IOTAResponseError>) -> Void)? = nil) {
+    public func changeStrongholdPassword(currentPassword: String,
+                                         newPassword: String,
+                                         onResult: ((Result<Bool, IOTAResponseError>) -> Void)? = nil) {
         walletManager?.sendCommand(id: "ChangeStrongholdPassword",
                                    cmd: "ChangeStrongholdPassword",
                                    payload: [
@@ -69,7 +72,8 @@ public class IOTAAccountManager {
         }
     }
     
-    public func setStrongholdPasswordClearInterval(_ interval: Int, onResult: ((Result<Bool, IOTAResponseError>) -> Void)? = nil) {
+    public func setStrongholdPasswordClearInterval(_ interval: Int,
+                                                   onResult: ((Result<Bool, IOTAResponseError>) -> Void)? = nil) {
         walletManager?.sendCommand(id: "SetStrongholdPasswordClearInterval",
                                    cmd: "SetStrongholdPasswordClearInterval",
                                    payload: [
@@ -93,7 +97,9 @@ public class IOTAAccountManager {
         }
     }
     
-    public func storeMnemonic(mnemonic: String, signer: SignerType, onResult: ((Result<Bool, IOTAResponseError>) -> Void)? = nil) {
+    public func storeMnemonic(mnemonic: String,
+                              signer: SignerType,
+                              onResult: ((Result<Bool, IOTAResponseError>) -> Void)? = nil) {
         walletManager?.sendCommand(id: "StoreMnemonic",
                                    cmd: "StoreMnemonic",
                                    payload: ["mnemonic": mnemonic, "signerType": ["type": signer.rawValue]]) { result in
@@ -102,7 +108,8 @@ public class IOTAAccountManager {
         }
     }
     
-    public func verifyMnemonic(mnemonic: String, onResult: ((Result<Bool, IOTAResponseError>) -> Void)? = nil) {
+    public func verifyMnemonic(mnemonic: String,
+                               onResult: ((Result<Bool, IOTAResponseError>) -> Void)? = nil) {
         walletManager?.sendCommand(id: "VerifyMnemonic",
                                    cmd: "VerifyMnemonic",
                                    payload: mnemonic) { result in
@@ -111,7 +118,11 @@ public class IOTAAccountManager {
         }
     }
     
-    public func createAccount(alias: String, mnemonic: String? = nil, url: String, localPow: Bool, onResult: ((Result<IOTAAccount, IOTAResponseError>) -> Void)? = nil) {
+    public func createAccount(alias: String,
+                              mnemonic: String? = nil,
+                              url: String,
+                              localPow: Bool,
+                              onResult: ((Result<IOTAAccount, IOTAResponseError>) -> Void)? = nil) {
         walletManager?.sendCommand(id: "CreateAccount",
                                    cmd: "CreateAccount",
                                    payload: ["alias": alias, "mnemonic": mnemonic as Any, "clientOptions": ["node": ["url": url]], "localPow": localPow]) { result in
@@ -124,7 +135,8 @@ public class IOTAAccountManager {
         }
     }
     
-    public func getAccount(alias: String, onResult: ((Result<IOTAAccount, IOTAResponseError>) -> Void)? = nil) {
+    public func getAccount(alias: String,
+                           onResult: ((Result<IOTAAccount, IOTAResponseError>) -> Void)? = nil) {
         walletManager?.sendCommand(id: "GetAccount",
                                    cmd: "GetAccount",
                                    payload: alias) { result in
@@ -137,7 +149,8 @@ public class IOTAAccountManager {
         }
     }
     
-    public func removeAccount(alias: String, onResult: ((Result<String, IOTAResponseError>) -> Void)? = nil) {
+    public func removeAccount(alias: String,
+                              onResult: ((Result<String, IOTAResponseError>) -> Void)? = nil) {
         walletManager?.sendCommand(id: "RemoveAccount",
                                    cmd: "RemoveAccount",
                                    payload: alias) { result in
@@ -178,7 +191,9 @@ public class IOTAAccountManager {
         }
     }
     
-    public func backup(destination: String, password: String, onResult: ((Result<Bool, IOTAResponseError>) -> Void)? = nil) {
+    public func backup(destination: String,
+                       password: String,
+                       onResult: ((Result<Bool, IOTAResponseError>) -> Void)? = nil) {
         guard destination.hasSuffix(".stronghold") else {
             onResult?(.failure(IOTAResponseError(type: "InvalidName", payload: IOTAResponseError.Details(type: "InvalidName", error: "Invalid destination name, expected a .stronghold file output"))))
             return
@@ -191,7 +206,9 @@ public class IOTAAccountManager {
         }
     }
     
-    public func restoreBackup(source: String, password: String, onResult: ((Result<Bool, IOTAResponseError>) -> Void)? = nil) {
+    public func restoreBackup(source: String,
+                              password: String,
+                              onResult: ((Result<Bool, IOTAResponseError>) -> Void)? = nil) {
         guard source.hasSuffix(".stronghold") else {
             onResult?(.failure(IOTAResponseError(type: "InvalidName", payload: IOTAResponseError.Details(type: "InvalidName", error: "Invalid destination name, expected a .stronghold file output"))))
             return
@@ -204,7 +221,9 @@ public class IOTAAccountManager {
         }
     }
     
-    public func startBackgroundSync(pollingInterval: Int, automaticOutputConsolidation: Bool, onResult: ((Result<Bool, IOTAResponseError>) -> Void)? = nil) {
+    public func startBackgroundSync(pollingInterval: Int,
+                                    automaticOutputConsolidation: Bool,
+                                    onResult: ((Result<Bool, IOTAResponseError>) -> Void)? = nil) {
         walletManager?.sendCommand(id: "StartBackgroundSync",
                                    cmd: "StartBackgroundSync",
                                    payload: [

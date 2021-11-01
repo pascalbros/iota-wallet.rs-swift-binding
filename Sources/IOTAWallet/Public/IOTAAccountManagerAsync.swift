@@ -11,7 +11,8 @@ public extension IOTAAccountManager {
         })
     }
     
-    func changeStrongholdPassword(currentPassword: String, newPassword: String) async -> Result<Bool, IOTAResponseError> {
+    func changeStrongholdPassword(currentPassword: String,
+                                  newPassword: String) async -> Result<Bool, IOTAResponseError> {
         await withCheckedContinuation({ sself in
             changeStrongholdPassword(currentPassword: currentPassword, newPassword: newPassword) { sself.resume(returning: $0) }
         })
@@ -37,23 +38,28 @@ public extension IOTAAccountManager {
     
     func generateMnemonic() async -> Result<String, IOTAResponseError> {
         await withCheckedContinuation({ sself in
-            generateMnemonic() { sself.resume(returning: $0) }
+            generateMnemonic { sself.resume(returning: $0) }
         })
     }
     
-    func storeMnemonic(mnemonic: String, signer: SignerType) async -> Result<Bool, IOTAResponseError> {
+    func storeMnemonic(mnemonic: String,
+                       signer: SignerType) async -> Result<Bool, IOTAResponseError> {
         await withCheckedContinuation({ sself in
             storeMnemonic(mnemonic: mnemonic, signer: signer) { sself.resume(returning: $0) }
         })
     }
     
-    func verifyMnemonic(mnemonic: String, signer: SignerType) async -> Result<Bool, IOTAResponseError> {
+    func verifyMnemonic(mnemonic: String,
+                        signer: SignerType) async -> Result<Bool, IOTAResponseError> {
         await withCheckedContinuation({ sself in
             verifyMnemonic(mnemonic: mnemonic) { sself.resume(returning: $0) }
         })
     }
     
-    func createAccount(alias: String, mnemonic: String? = nil, url: String, localPow: Bool) async -> Result<IOTAAccount, IOTAResponseError> {
+    func createAccount(alias: String,
+                       mnemonic: String? = nil,
+                       url: String,
+                       localPow: Bool) async -> Result<IOTAAccount, IOTAResponseError> {
         await withCheckedContinuation({ sself in
             createAccount(alias: alias, mnemonic: mnemonic, url: url, localPow: localPow) { sself.resume(returning: $0) }
         })
@@ -73,29 +79,32 @@ public extension IOTAAccountManager {
 
     func deleteStorage() async -> Result<Bool, IOTAResponseError> {
         await withCheckedContinuation({ sself in
-            deleteStorage() { sself.resume(returning: $0) }
+            deleteStorage { sself.resume(returning: $0) }
         })
     }
 
     func getAccounts() async -> Result<[IOTAAccount], IOTAResponseError> {
         await withCheckedContinuation({ sself in
-            getAccounts() { sself.resume(returning: $0) }
+            getAccounts { sself.resume(returning: $0) }
         })
     }
 
-    func backup(destination: String, password: String) async -> Result<Bool, IOTAResponseError> {
+    func backup(destination: String,
+                password: String) async -> Result<Bool, IOTAResponseError> {
         await withCheckedContinuation({ sself in
             backup(destination: destination, password: password) { sself.resume(returning: $0) }
         })
     }
     
-    func restoreBackup(source: String, password: String) async -> Result<Bool, IOTAResponseError> {
+    func restoreBackup(source: String,
+                       password: String) async -> Result<Bool, IOTAResponseError> {
         await withCheckedContinuation({ sself in
             restoreBackup(source: source, password: password) { sself.resume(returning: $0) }
         })
     }
 
-    func startBackgroundSync(pollingInterval: Int, automaticOutputConsolidation: Bool) async -> Result<Bool, IOTAResponseError> {
+    func startBackgroundSync(pollingInterval: Int,
+                             automaticOutputConsolidation: Bool) async -> Result<Bool, IOTAResponseError> {
         await withCheckedContinuation({ sself in
             startBackgroundSync(pollingInterval: pollingInterval, automaticOutputConsolidation: automaticOutputConsolidation) { sself.resume(returning: $0) }
         })
@@ -103,7 +112,7 @@ public extension IOTAAccountManager {
 
     public func stopBackgroundSync() async -> Result<Bool, IOTAResponseError> {
         await withCheckedContinuation({ sself in
-            stopBackgroundSync() { sself.resume(returning: $0) }
+            stopBackgroundSync { sself.resume(returning: $0) }
         })
     }
 }

@@ -15,11 +15,6 @@ extension String {
     var decodedResponse: WalletGenericResponse? {
         WalletGenericResponse.decode(self)
     }
-    
-    func decode<T: Decodable>(to: T.Type) -> T? {
-        let data = Data(self.utf8)
-        return try? JSONDecoder().decode(to, from: data)
-    }
 }
 
 extension UnsafePointer where Pointee == CChar {

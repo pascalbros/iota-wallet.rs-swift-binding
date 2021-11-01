@@ -91,15 +91,16 @@ public enum OutputKind: String, Decodable {
 }
 
 public struct StrongholdStatus: Decodable {
+    public enum Status: String, Decodable {
+        case locked = "Locked"
+        case unlocked = "Unlocked"
+    }
+    public struct Data: Decodable {
+        public let secs: Int
+        public let nanos: Int
+    }
+    
     public struct Snapshot: Decodable {
-        public enum Status: String, Decodable {
-            case locked = "Locked"
-            case unlocked = "Unlocked"
-        }
-        public struct Data: Decodable {
-            public let secs: Int
-            public let nanos: Int
-        }
         public let status: Status
         public let data: Data?
     }
