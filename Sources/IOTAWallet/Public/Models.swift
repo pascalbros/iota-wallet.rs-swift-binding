@@ -43,7 +43,7 @@ public class IOTAAccount: Decodable {
         public let messageId: String
         public let index: Int
         public let amount: Int
-        public let kind: String
+        public let kind: OutputKind?
         public let isSpent: Bool?
     }
     
@@ -85,8 +85,12 @@ public struct NodeInfo: Decodable {
     public let features: [String]
 }
 
+public enum OutputKind: String, Decodable {
+    case signatureLockedSingle = "SignatureLockedSingle"
+    case signatureLockedDustAllowance = "SignatureLockedDustAllowance"
+}
+
 public struct StrongholdStatus: Decodable {
-    //"[IOTAWallet] " ["{\"id\":\"GetStrongholdStatus-z6l496281856\",\"type\":\"StrongholdStatus\",\"payload\":{\"snapshotPath\":\"/Users/pasquale.ambrosini/tmpIOTAWallet/wallet.stronghold\",\"snapshot\":{\"status\":\"Unlocked\",\"data\":{\"secs\":0,\"nanos\":0}}},\"action\":\"GetStrongholdStatus\"}"]
     public struct Snapshot: Decodable {
         public enum Status: String, Decodable {
             case locked = "Locked"
@@ -101,4 +105,33 @@ public struct StrongholdStatus: Decodable {
     }
     public let snapshotPath: String
     public let snapshot: Snapshot
+}
+
+public struct TransferOptions {
+    public enum RemainderValueStrategy {
+        case changeAddress
+        case reuseAddress
+        case accountAddress(address: String)
+        
+        var dict: [String: Any] {
+            let strategyKey = "strategy"
+            switch self {
+            case .changeAddress: return [strategyKey: "ChangeAddress"]
+            case .reuseAddress: return [strategyKey: "ReuseAddress"]
+            case .accountAddress(let address): return [strategyKey: "ReuseAddress", "value": address]
+            }
+        }
+    }
+    
+    public let remainderValueStrategy: RemainderValueStrategy?
+    public let skipSync: Bool?
+    public let outputKind: OutputKind?
+    
+    var dict: [String: Any] {
+        var result: [String: Any] = [:]
+        result["remainder_value_strategy"] = remainderValueStrategy?.dict
+        result["skip_sync"] = skipSync
+        result["output_kind"] = outputKind?.rawValue
+        return result
+    }
 }

@@ -133,4 +133,21 @@ extension IOTAAccount {
             onResult?(.success(WalletResponse<Address>.decode(result)?.payload))
         }
     }
+    
+    public func sendTransfer(address: String, amount: Int, options: TransferOptions? = nil, onResult: ((Result<Bool, IOTAResponseError>) -> Void)?) {
+        var currentOptions: TransferOptions? = options
+        var transfer: [String: Any] = ["address": address, "amount": amount]
+        if currentOptions == nil {
+            currentOptions = TransferOptions(remainderValueStrategy: .changeAddress, skipSync: false, outputKind: nil)
+        }
+        currentOptions!.dict.forEach({ transfer[$0.key] = $0.value })
+        accountManager?.walletManager?.sendCommand(id: "SendTransfer",
+                                                   cmd: "SendTransfer",
+                                                   payload: ["accountId": id,
+                                                             "transfer": transfer
+                                                            ]) { result in
+            let isError = result.decodedResponse?.isError ?? false
+            onResult?(isError ? .failure(IOTAResponseError.decode(from: result)) : .success(true))
+        }
+    }
 }

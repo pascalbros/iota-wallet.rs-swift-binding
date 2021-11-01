@@ -192,4 +192,19 @@ final class IOTAAccountTests: XCTestCase {
         }
         wait(for: [expectation], timeout: 5.0)
     }
+    
+//    func testSendTransfer() {
+//        Thread.sleep(forTimeInterval: 1.0)
+//        let expectation = XCTestExpectation(description: "Send transfer")
+//        newAccountPreamble { account in
+//            account.sendTransfer(address: address2, amount: 1_000_000) { response in
+//                switch response {
+//                case .success(let result): print(result)
+//                case .failure(let error): XCTFail(error.payload.error)
+//                }
+//                expectation.fulfill()
+//            }
+//        }
+//        wait(for: [expectation], timeout: 10.0)
+//    }
 }

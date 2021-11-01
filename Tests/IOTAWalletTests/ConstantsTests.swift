@@ -8,5 +8,7 @@ let storagePath = FileManager.default.temporaryDirectory.appendingPathComponent(
 #endif
 let nodeUrl = "https://api.lb-0.h.chrysalis-devnet.iota.cafe"
 let mnemonic = "season body fog frost focus size journey glimpse size shed blanket jewel wood access kind useful visa peanut midnight extra margin sentence column diesel"
+let mnemonic2 = "clever cross decorate deliver daughter smart evoke clinic furnace quarter wave shine tattoo amazing wrong file dance half obey horror ribbon win person gossip"
+let address2 = "atoi1qzqjcfypqa4hwwpr0yw3vn93m4npjaaexhncpwdsu7x4zrj9mtkuyew5hjx"
 let password = "password"
 let alias = "Alice"
