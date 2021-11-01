@@ -1,0 +1,621 @@
+{
+  "warnings": [
+    {
+      "file": "/Users/pasquale.ambrosini/Projects/Private/iota/swift-binding/Sources/IOTAWallet/Public/IOTAAccount.swift",
+      "line": 4,
+      "symbol": "IOTAAccount.sync(onResult:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/pasquale.ambrosini/Projects/Private/iota/swift-binding/Sources/IOTAWallet/Public/IOTAAccount.swift",
+      "line": 17,
+      "symbol": "IOTAAccount.generateAddress(onResult:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/pasquale.ambrosini/Projects/Private/iota/swift-binding/Sources/IOTAWallet/Public/IOTAAccount.swift",
+      "line": 32,
+      "symbol": "IOTAAccount.latestAddress(onResult:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/pasquale.ambrosini/Projects/Private/iota/swift-binding/Sources/IOTAWallet/Public/IOTAAccount.swift",
+      "line": 44,
+      "symbol": "IOTAAccount.balance(onResult:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/pasquale.ambrosini/Projects/Private/iota/swift-binding/Sources/IOTAWallet/Public/IOTAAccount.swift",
+      "line": 56,
+      "symbol": "IOTAAccount.nodeInfo(url:jwt:username:password:onResult:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/pasquale.ambrosini/Projects/Private/iota/swift-binding/Sources/IOTAWallet/Public/IOTAAccount.swift",
+      "line": 70,
+      "symbol": "IOTAAccount.setAlias(_:onResult:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/pasquale.ambrosini/Projects/Private/iota/swift-binding/Sources/IOTAWallet/Public/IOTAAccount.swift",
+      "line": 81,
+      "symbol": "IOTAAccount.addresses(onResult:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/pasquale.ambrosini/Projects/Private/iota/swift-binding/Sources/IOTAWallet/Public/IOTAAccount.swift",
+      "line": 95,
+      "symbol": "IOTAAccount.unspentAddresses(onResult:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/pasquale.ambrosini/Projects/Private/iota/swift-binding/Sources/IOTAWallet/Public/IOTAAccount.swift",
+      "line": 109,
+      "symbol": "IOTAAccount.spentAddresses(onResult:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/pasquale.ambrosini/Projects/Private/iota/swift-binding/Sources/IOTAWallet/Public/IOTAAccount.swift",
+      "line": 123,
+      "symbol": "IOTAAccount.unusedAddress(onResult:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/pasquale.ambrosini/Projects/Private/iota/swift-binding/Sources/IOTAWallet/Public/IOTAAccount.swift",
+      "line": 137,
+      "symbol": "IOTAAccount.sendTransfer(address:amount:options:onResult:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/pasquale.ambrosini/Projects/Private/iota/swift-binding/Sources/IOTAWallet/Public/IOTAWallet.swift",
+      "line": 1,
+      "symbol": "IOTAWalletConfig",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/pasquale.ambrosini/Projects/Private/iota/swift-binding/Sources/IOTAWallet/Public/IOTAWallet.swift",
+      "line": 2,
+      "symbol": "IOTAWalletConfig.debugLevel",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/pasquale.ambrosini/Projects/Private/iota/swift-binding/Sources/IOTAWallet/Public/Models.swift",
+      "line": 3,
+      "symbol": "IOTAAccount",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/pasquale.ambrosini/Projects/Private/iota/swift-binding/Sources/IOTAWallet/Public/Models.swift",
+      "line": 3,
+      "symbol": "IOTAResponseError",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/pasquale.ambrosini/Projects/Private/iota/swift-binding/Sources/IOTAWallet/Public/Models.swift",
+      "line": 5,
+      "symbol": "IOTAResponseError.Details",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/pasquale.ambrosini/Projects/Private/iota/swift-binding/Sources/IOTAWallet/Public/Models.swift",
+      "line": 6,
+      "symbol": "IOTAResponseError.Details.type",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/pasquale.ambrosini/Projects/Private/iota/swift-binding/Sources/IOTAWallet/Public/Models.swift",
+      "line": 7,
+      "symbol": "IOTAResponseError.Details.error",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/pasquale.ambrosini/Projects/Private/iota/swift-binding/Sources/IOTAWallet/Public/Models.swift",
+      "line": 10,
+      "symbol": "IOTAResponseError.type",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/pasquale.ambrosini/Projects/Private/iota/swift-binding/Sources/IOTAWallet/Public/Models.swift",
+      "line": 11,
+      "symbol": "IOTAResponseError.payload",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/pasquale.ambrosini/Projects/Private/iota/swift-binding/Sources/IOTAWallet/Public/Models.swift",
+      "line": 17,
+      "symbol": "LogLevel",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/pasquale.ambrosini/Projects/Private/iota/swift-binding/Sources/IOTAWallet/Public/Models.swift",
+      "line": 18,
+      "symbol": "LogLevel.none",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/pasquale.ambrosini/Projects/Private/iota/swift-binding/Sources/IOTAWallet/Public/Models.swift",
+      "line": 19,
+      "symbol": "LogLevel.errors",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/pasquale.ambrosini/Projects/Private/iota/swift-binding/Sources/IOTAWallet/Public/Models.swift",
+      "line": 20,
+      "symbol": "LogLevel.warnings",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/pasquale.ambrosini/Projects/Private/iota/swift-binding/Sources/IOTAWallet/Public/Models.swift",
+      "line": 21,
+      "symbol": "LogLevel.debug",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/pasquale.ambrosini/Projects/Private/iota/swift-binding/Sources/IOTAWallet/Public/Models.swift",
+      "line": 24,
+      "symbol": "SignerType",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/pasquale.ambrosini/Projects/Private/iota/swift-binding/Sources/IOTAWallet/Public/Models.swift",
+      "line": 25,
+      "symbol": "SignerType.stronghold",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/pasquale.ambrosini/Projects/Private/iota/swift-binding/Sources/IOTAWallet/Public/Models.swift",
+      "line": 28,
+      "symbol": "IOTAAccount",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/pasquale.ambrosini/Projects/Private/iota/swift-binding/Sources/IOTAWallet/Public/Models.swift",
+      "line": 30,
+      "symbol": "IOTAAccount.Address",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/pasquale.ambrosini/Projects/Private/iota/swift-binding/Sources/IOTAWallet/Public/Models.swift",
+      "line": 31,
+      "symbol": "IOTAAccount.Address.address",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/pasquale.ambrosini/Projects/Private/iota/swift-binding/Sources/IOTAWallet/Public/Models.swift",
+      "line": 32,
+      "symbol": "IOTAAccount.Address.balance",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/pasquale.ambrosini/Projects/Private/iota/swift-binding/Sources/IOTAWallet/Public/Models.swift",
+      "line": 33,
+      "symbol": "IOTAAccount.Address.keyIndex",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/pasquale.ambrosini/Projects/Private/iota/swift-binding/Sources/IOTAWallet/Public/Models.swift",
+      "line": 34,
+      "symbol": "IOTAAccount.Address.outputs",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/pasquale.ambrosini/Projects/Private/iota/swift-binding/Sources/IOTAWallet/Public/Models.swift",
+      "line": 41,
+      "symbol": "IOTAAccount.AddressOutput",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/pasquale.ambrosini/Projects/Private/iota/swift-binding/Sources/IOTAWallet/Public/Models.swift",
+      "line": 42,
+      "symbol": "IOTAAccount.AddressOutput.transactionId",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/pasquale.ambrosini/Projects/Private/iota/swift-binding/Sources/IOTAWallet/Public/Models.swift",
+      "line": 43,
+      "symbol": "IOTAAccount.AddressOutput.messageId",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/pasquale.ambrosini/Projects/Private/iota/swift-binding/Sources/IOTAWallet/Public/Models.swift",
+      "line": 44,
+      "symbol": "IOTAAccount.AddressOutput.index",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/pasquale.ambrosini/Projects/Private/iota/swift-binding/Sources/IOTAWallet/Public/Models.swift",
+      "line": 45,
+      "symbol": "IOTAAccount.AddressOutput.amount",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/pasquale.ambrosini/Projects/Private/iota/swift-binding/Sources/IOTAWallet/Public/Models.swift",
+      "line": 46,
+      "symbol": "IOTAAccount.AddressOutput.kind",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/pasquale.ambrosini/Projects/Private/iota/swift-binding/Sources/IOTAWallet/Public/Models.swift",
+      "line": 47,
+      "symbol": "IOTAAccount.AddressOutput.isSpent",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/pasquale.ambrosini/Projects/Private/iota/swift-binding/Sources/IOTAWallet/Public/Models.swift",
+      "line": 51,
+      "symbol": "IOTAAccount.id",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/pasquale.ambrosini/Projects/Private/iota/swift-binding/Sources/IOTAWallet/Public/Models.swift",
+      "line": 52,
+      "symbol": "IOTAAccount.alias",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/pasquale.ambrosini/Projects/Private/iota/swift-binding/Sources/IOTAWallet/Public/Models.swift",
+      "line": 53,
+      "symbol": "IOTAAccount.addresses",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/pasquale.ambrosini/Projects/Private/iota/swift-binding/Sources/IOTAWallet/Public/Models.swift",
+      "line": 60,
+      "symbol": "BalanceResponse",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/pasquale.ambrosini/Projects/Private/iota/swift-binding/Sources/IOTAWallet/Public/Models.swift",
+      "line": 61,
+      "symbol": "BalanceResponse.total",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/pasquale.ambrosini/Projects/Private/iota/swift-binding/Sources/IOTAWallet/Public/Models.swift",
+      "line": 62,
+      "symbol": "BalanceResponse.available",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/pasquale.ambrosini/Projects/Private/iota/swift-binding/Sources/IOTAWallet/Public/Models.swift",
+      "line": 63,
+      "symbol": "BalanceResponse.incoming",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/pasquale.ambrosini/Projects/Private/iota/swift-binding/Sources/IOTAWallet/Public/Models.swift",
+      "line": 64,
+      "symbol": "BalanceResponse.outgoing",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/pasquale.ambrosini/Projects/Private/iota/swift-binding/Sources/IOTAWallet/Public/Models.swift",
+      "line": 67,
+      "symbol": "NodeInfoResponse",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/pasquale.ambrosini/Projects/Private/iota/swift-binding/Sources/IOTAWallet/Public/Models.swift",
+      "line": 68,
+      "symbol": "NodeInfoResponse.nodeinfo",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/pasquale.ambrosini/Projects/Private/iota/swift-binding/Sources/IOTAWallet/Public/Models.swift",
+      "line": 69,
+      "symbol": "NodeInfoResponse.url",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/pasquale.ambrosini/Projects/Private/iota/swift-binding/Sources/IOTAWallet/Public/Models.swift",
+      "line": 72,
+      "symbol": "NodeInfo",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/pasquale.ambrosini/Projects/Private/iota/swift-binding/Sources/IOTAWallet/Public/Models.swift",
+      "line": 73,
+      "symbol": "NodeInfo.name",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/pasquale.ambrosini/Projects/Private/iota/swift-binding/Sources/IOTAWallet/Public/Models.swift",
+      "line": 74,
+      "symbol": "NodeInfo.version",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/pasquale.ambrosini/Projects/Private/iota/swift-binding/Sources/IOTAWallet/Public/Models.swift",
+      "line": 75,
+      "symbol": "NodeInfo.isHealthy",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/pasquale.ambrosini/Projects/Private/iota/swift-binding/Sources/IOTAWallet/Public/Models.swift",
+      "line": 76,
+      "symbol": "NodeInfo.networkId",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/pasquale.ambrosini/Projects/Private/iota/swift-binding/Sources/IOTAWallet/Public/Models.swift",
+      "line": 77,
+      "symbol": "NodeInfo.minPoWScore",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/pasquale.ambrosini/Projects/Private/iota/swift-binding/Sources/IOTAWallet/Public/Models.swift",
+      "line": 78,
+      "symbol": "NodeInfo.messagesPerSecond",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/pasquale.ambrosini/Projects/Private/iota/swift-binding/Sources/IOTAWallet/Public/Models.swift",
+      "line": 79,
+      "symbol": "NodeInfo.referencedMessagesPerSecond",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/pasquale.ambrosini/Projects/Private/iota/swift-binding/Sources/IOTAWallet/Public/Models.swift",
+      "line": 80,
+      "symbol": "NodeInfo.referencedRate",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/pasquale.ambrosini/Projects/Private/iota/swift-binding/Sources/IOTAWallet/Public/Models.swift",
+      "line": 81,
+      "symbol": "NodeInfo.latestMilestoneTimestamp",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/pasquale.ambrosini/Projects/Private/iota/swift-binding/Sources/IOTAWallet/Public/Models.swift",
+      "line": 82,
+      "symbol": "NodeInfo.latestMilestoneIndex",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/pasquale.ambrosini/Projects/Private/iota/swift-binding/Sources/IOTAWallet/Public/Models.swift",
+      "line": 83,
+      "symbol": "NodeInfo.confirmedMilestoneIndex",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/pasquale.ambrosini/Projects/Private/iota/swift-binding/Sources/IOTAWallet/Public/Models.swift",
+      "line": 84,
+      "symbol": "NodeInfo.pruningIndex",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/pasquale.ambrosini/Projects/Private/iota/swift-binding/Sources/IOTAWallet/Public/Models.swift",
+      "line": 85,
+      "symbol": "NodeInfo.features",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/pasquale.ambrosini/Projects/Private/iota/swift-binding/Sources/IOTAWallet/Public/Models.swift",
+      "line": 88,
+      "symbol": "OutputKind",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/pasquale.ambrosini/Projects/Private/iota/swift-binding/Sources/IOTAWallet/Public/Models.swift",
+      "line": 89,
+      "symbol": "OutputKind.signatureLockedSingle",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/pasquale.ambrosini/Projects/Private/iota/swift-binding/Sources/IOTAWallet/Public/Models.swift",
+      "line": 90,
+      "symbol": "OutputKind.signatureLockedDustAllowance",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/pasquale.ambrosini/Projects/Private/iota/swift-binding/Sources/IOTAWallet/Public/Models.swift",
+      "line": 93,
+      "symbol": "StrongholdStatus",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/pasquale.ambrosini/Projects/Private/iota/swift-binding/Sources/IOTAWallet/Public/Models.swift",
+      "line": 94,
+      "symbol": "StrongholdStatus.Status",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/pasquale.ambrosini/Projects/Private/iota/swift-binding/Sources/IOTAWallet/Public/Models.swift",
+      "line": 95,
+      "symbol": "StrongholdStatus.Status.locked",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/pasquale.ambrosini/Projects/Private/iota/swift-binding/Sources/IOTAWallet/Public/Models.swift",
+      "line": 96,
+      "symbol": "StrongholdStatus.Status.unlocked",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/pasquale.ambrosini/Projects/Private/iota/swift-binding/Sources/IOTAWallet/Public/Models.swift",
+      "line": 98,
+      "symbol": "StrongholdStatus.Data",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/pasquale.ambrosini/Projects/Private/iota/swift-binding/Sources/IOTAWallet/Public/Models.swift",
+      "line": 99,
+      "symbol": "StrongholdStatus.Data.secs",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/pasquale.ambrosini/Projects/Private/iota/swift-binding/Sources/IOTAWallet/Public/Models.swift",
+      "line": 100,
+      "symbol": "StrongholdStatus.Data.nanos",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/pasquale.ambrosini/Projects/Private/iota/swift-binding/Sources/IOTAWallet/Public/Models.swift",
+      "line": 103,
+      "symbol": "StrongholdStatus.Snapshot",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/pasquale.ambrosini/Projects/Private/iota/swift-binding/Sources/IOTAWallet/Public/Models.swift",
+      "line": 104,
+      "symbol": "StrongholdStatus.Snapshot.status",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/pasquale.ambrosini/Projects/Private/iota/swift-binding/Sources/IOTAWallet/Public/Models.swift",
+      "line": 105,
+      "symbol": "StrongholdStatus.Snapshot.data",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/pasquale.ambrosini/Projects/Private/iota/swift-binding/Sources/IOTAWallet/Public/Models.swift",
+      "line": 107,
+      "symbol": "StrongholdStatus.snapshotPath",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/pasquale.ambrosini/Projects/Private/iota/swift-binding/Sources/IOTAWallet/Public/Models.swift",
+      "line": 108,
+      "symbol": "StrongholdStatus.snapshot",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/pasquale.ambrosini/Projects/Private/iota/swift-binding/Sources/IOTAWallet/Public/Models.swift",
+      "line": 111,
+      "symbol": "TransferOptions",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/pasquale.ambrosini/Projects/Private/iota/swift-binding/Sources/IOTAWallet/Public/Models.swift",
+      "line": 112,
+      "symbol": "TransferOptions.RemainderValueStrategy",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/pasquale.ambrosini/Projects/Private/iota/swift-binding/Sources/IOTAWallet/Public/Models.swift",
+      "line": 113,
+      "symbol": "TransferOptions.RemainderValueStrategy.changeAddress",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/pasquale.ambrosini/Projects/Private/iota/swift-binding/Sources/IOTAWallet/Public/Models.swift",
+      "line": 114,
+      "symbol": "TransferOptions.RemainderValueStrategy.reuseAddress",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/pasquale.ambrosini/Projects/Private/iota/swift-binding/Sources/IOTAWallet/Public/Models.swift",
+      "line": 115,
+      "symbol": "TransferOptions.RemainderValueStrategy.accountAddress(address:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/pasquale.ambrosini/Projects/Private/iota/swift-binding/Sources/IOTAWallet/Public/Models.swift",
+      "line": 127,
+      "symbol": "TransferOptions.remainderValueStrategy",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/pasquale.ambrosini/Projects/Private/iota/swift-binding/Sources/IOTAWallet/Public/Models.swift",
+      "line": 128,
+      "symbol": "TransferOptions.skipSync",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/pasquale.ambrosini/Projects/Private/iota/swift-binding/Sources/IOTAWallet/Public/Models.swift",
+      "line": 129,
+      "symbol": "TransferOptions.outputKind",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    }
+  ],
+  "source_directory": "/Users/pasquale.ambrosini/Projects/Private/iota/swift-binding"
+}
