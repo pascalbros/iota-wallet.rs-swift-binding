@@ -39,7 +39,7 @@ public class IOTAAccountManager {
     /// Sets the Stronghold password.
     /// - Parameters:
     ///   - password: The storage password
-    ///   - onResult: The result
+    ///   - onResult: The result or error
     public func setStrongholdPassword(_ password: String,
                                       onResult: ((Result<Bool, IOTAResponseError>) -> Void)? = nil) {
         walletManager?.sendCommand(id: "SetStrongholdPassword",
@@ -54,7 +54,7 @@ public class IOTAAccountManager {
     /// - Parameters:
     ///   - currentPassword: The current password
     ///   - newPassword: The new password
-    ///   - onResult: The result
+    ///   - onResult: The result or error
     public func changeStrongholdPassword(currentPassword: String,
                                          newPassword: String,
                                          onResult: ((Result<Bool, IOTAResponseError>) -> Void)? = nil) {
@@ -69,7 +69,7 @@ public class IOTAAccountManager {
     }
     
     /// Gets the current Stronghold status.
-    /// - Parameter onResult: The result
+    /// - Parameter onResult: The result or error
     public func strongholdStatus(onResult: ((Result<StrongholdStatus, IOTAResponseError>) -> Void)? = nil) {
         walletManager?.sendCommand(id: "GetStrongholdStatus",
                                    cmd: "GetStrongholdStatus",
@@ -84,7 +84,7 @@ public class IOTAAccountManager {
     }
     
     /// Locks Stronghold if needed.
-    /// - Parameter onResult: The result
+    /// - Parameter onResult: The result or error
     public func lockStronghold(onResult: ((Result<Bool, IOTAResponseError>) -> Void)? = nil) {
         walletManager?.sendCommand(id: "LockStronghold",
                                    cmd: "LockStronghold",
@@ -97,7 +97,7 @@ public class IOTAAccountManager {
     /// Sets Stronghold password clear interval.
     /// - Parameters:
     ///   - interval: The interval in seconds
-    ///   - onResult: The result
+    ///   - onResult: The result or error
     public func setStrongholdPasswordClearInterval(_ interval: Int,
                                                    onResult: ((Result<Bool, IOTAResponseError>) -> Void)? = nil) {
         walletManager?.sendCommand(id: "SetStrongholdPasswordClearInterval",
@@ -112,7 +112,7 @@ public class IOTAAccountManager {
     }
     
     /// Generates a new mnemonic.
-    /// - Parameter onResult: The result
+    /// - Parameter onResult: The generated mnemonic or error
     public func generateMnemonic(onResult: @escaping (Result<String, IOTAResponseError>) -> Void) {
         walletManager?.sendCommand(id: "GenerateMnemonic",
                                    cmd: "GenerateMnemonic",
@@ -129,7 +129,7 @@ public class IOTAAccountManager {
     /// - Parameters:
     ///   - mnemonic: The provided mnemonic
     ///   - signer: The signer
-    ///   - onResult: The result
+    ///   - onResult: The result or error
     public func storeMnemonic(mnemonic: String,
                               signer: SignerType,
                               onResult: ((Result<Bool, IOTAResponseError>) -> Void)? = nil) {
@@ -200,7 +200,7 @@ public class IOTAAccountManager {
     /// Removes the account with the given identifier.
     /// - Parameters:
     ///   - alias: The provided account alias
-    ///   - onResult: The result
+    ///   - onResult: The result or error
     public func removeAccount(alias: String,
                               onResult: ((Result<String, IOTAResponseError>) -> Void)? = nil) {
         walletManager?.sendCommand(id: "RemoveAccount",
@@ -215,7 +215,7 @@ public class IOTAAccountManager {
     }
     
     /// Deletes the storage (database and/or Stronghold)
-    /// - Parameter onResult: The result
+    /// - Parameter onResult: The result or error
     public func deleteStorage(onResult: ((Result<Bool, IOTAResponseError>) -> Void)? = nil) {
         if (try? FileManager.default.contentsOfDirectory(atPath: storagePath).count) == 0 {
             onResult?(.success(true))
@@ -233,7 +233,7 @@ public class IOTAAccountManager {
     }
     
     /// Gets all stored accounts.
-    /// - Parameter onResult: The result
+    /// - Parameter onResult: The list of accounts or error
     public func getAccounts(onResult: ((Result<[IOTAAccount], IOTAResponseError>) -> Void)? = nil) {
         walletManager?.sendCommand(id: "GetAccounts",
                                    cmd: "GetAccounts",
@@ -251,7 +251,7 @@ public class IOTAAccountManager {
     /// - Parameters:
     ///   - destination: The path to the backup file
     ///   - password: The backup Stronghold password
-    ///   - onResult: The result
+    ///   - onResult: The result or error
     public func backup(destination: String,
                        password: String,
                        onResult: ((Result<Bool, IOTAResponseError>) -> Void)? = nil) {
@@ -271,7 +271,7 @@ public class IOTAAccountManager {
     /// - Parameters:
     ///   - source: The path to the backup file
     ///   - password: The backup Stronghold password
-    ///   - onResult: The result
+    ///   - onResult: The result or error
     public func restoreBackup(source: String,
                               password: String,
                               onResult: ((Result<Bool, IOTAResponseError>) -> Void)? = nil) {
@@ -291,7 +291,7 @@ public class IOTAAccountManager {
     /// - Parameters:
     ///   - pollingInterval: The polling interval in seconds
     ///   - automaticOutputConsolidation: If outputs should get consolidated automatically
-    ///   - onResult: The result
+    ///   - onResult: The result or error
     public func startBackgroundSync(pollingInterval: Int,
                                     automaticOutputConsolidation: Bool,
                                     onResult: ((Result<Bool, IOTAResponseError>) -> Void)? = nil) {
@@ -307,7 +307,7 @@ public class IOTAAccountManager {
     }
     
     /// Stops the background polling and MQTT monitoring.
-    /// - Parameter onResult: The result
+    /// - Parameter onResult: The result or error
     public func stopBackgroundSync(onResult: ((Result<Bool, IOTAResponseError>) -> Void)? = nil) {
         walletManager?.sendCommand(id: "StopBackgroundSync",
                                    cmd: "StopBackgroundSync",
