@@ -17,7 +17,7 @@
     <a title="IOTAAccount Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">IOTAWallet 0.1.0 Docs</a> (20% documented)</p>
+        <p><a href="../index.html">IOTAWallet 0.1.0 Docs</a> (100% documented)</p>
         <p class="header-right"><a href="https://github.com/pascalbros/iota-wallet.rs-swift-binding"><img src="../img/gh.png" alt="GitHub"/>View on GitHub</a></p>
         <div class="header-right">
           <form role="search" action="../search.json">
@@ -121,7 +121,7 @@
 
                 </div>
               </div>
-            <p>Undocumented</p>
+            <p>The IOTAAccount that defines a IOTA account.</p>
 
           </section>
           <section class="section task-group-section">
@@ -140,7 +140,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>The address associated to an account.</p>
 
                         <a href="../Classes/IOTAAccount/Address.html" class="slightly-smaller">See more</a>
                       </div>
@@ -168,7 +168,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>The address output for a transaction.</p>
 
                         <a href="../Classes/IOTAAccount/AddressOutput.html" class="slightly-smaller">See more</a>
                       </div>
@@ -196,7 +196,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>The ID for the output.</p>
 
                       </div>
                       <div class="declaration">
@@ -223,7 +223,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>The alias.</p>
 
                       </div>
                       <div class="declaration">
@@ -250,7 +250,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>The addresses.</p>
 
                       </div>
                       <div class="declaration">
@@ -277,7 +277,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Synchronizes the account with the Tangle.</p>
 
                       </div>
                       <div class="declaration">
@@ -287,6 +287,25 @@
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">sync</span><span class="p">(</span><span class="nv">onResult</span><span class="p">:</span> <span class="p">((</span><span class="kt">Result</span><span class="o">&lt;</span><span class="kt">Bool</span><span class="p">,</span> <span class="kt"><a href="../Structs/IOTAResponseError.html">IOTAResponseError</a></span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?)</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>onResult</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The result or error</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -304,7 +323,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Generates a new unused address and returns it.</p>
 
                       </div>
                       <div class="declaration">
@@ -314,6 +333,25 @@
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">generateAddress</span><span class="p">(</span><span class="nv">onResult</span><span class="p">:</span> <span class="p">((</span><span class="kt">Result</span><span class="o">&lt;</span><span class="kt">IOTAAccount</span><span class="o">.</span><span class="kt"><a href="../Classes/IOTAAccount/Address.html">Address</a></span><span class="p">,</span> <span class="kt"><a href="../Structs/IOTAResponseError.html">IOTAResponseError</a></span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?)</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>onResult</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The address or error</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -331,7 +369,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Returns the latest address (the one with the biggest keyIndex).</p>
 
                       </div>
                       <div class="declaration">
@@ -341,6 +379,25 @@
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">latestAddress</span><span class="p">(</span><span class="nv">onResult</span><span class="p">:</span> <span class="p">((</span><span class="kt">Result</span><span class="o">&lt;</span><span class="kt">IOTAAccount</span><span class="o">.</span><span class="kt"><a href="../Classes/IOTAAccount/Address.html">Address</a></span><span class="p">,</span> <span class="kt"><a href="../Structs/IOTAResponseError.html">IOTAResponseError</a></span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?)</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>onResult</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The address or error</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -358,7 +415,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Returns the account&rsquo;s balance information object.</p>
 
                       </div>
                       <div class="declaration">
@@ -368,6 +425,25 @@
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">balance</span><span class="p">(</span><span class="nv">onResult</span><span class="p">:</span> <span class="p">((</span><span class="kt">Result</span><span class="o">&lt;</span><span class="kt"><a href="../Structs/BalanceResponse.html">BalanceResponse</a></span><span class="p">,</span> <span class="kt"><a href="../Structs/IOTAResponseError.html">IOTAResponseError</a></span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?)</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>onResult</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The balance response or error</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -385,7 +461,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Gets information about the node.</p>
 
                       </div>
                       <div class="declaration">
@@ -395,6 +471,73 @@
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">nodeInfo</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">jwt</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="s">""</span><span class="p">,</span> <span class="nv">username</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="s">""</span><span class="p">,</span> <span class="nv">password</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="s">""</span><span class="p">,</span> <span class="nv">onResult</span><span class="p">:</span> <span class="p">((</span><span class="kt">Result</span><span class="o">&lt;</span><span class="kt"><a href="../Structs/NodeInfoResponse.html">NodeInfoResponse</a></span><span class="p">,</span> <span class="kt"><a href="../Structs/IOTAResponseError.html">IOTAResponseError</a></span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?)</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>url</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The node url</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>jwt</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The node auth JWT token</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>username</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The node auth username</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>password</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The node auth password</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>onResult</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The node info or error</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -412,7 +555,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Updates the account alias.</p>
 
                       </div>
                       <div class="declaration">
@@ -422,6 +565,37 @@
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">setAlias</span><span class="p">(</span><span class="n">_</span> <span class="nv">newAlias</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">onResult</span><span class="p">:</span> <span class="p">((</span><span class="kt">Result</span><span class="o">&lt;</span><span class="kt">Bool</span><span class="p">,</span> <span class="kt"><a href="../Structs/IOTAResponseError.html">IOTAResponseError</a></span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?)</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>newAlias</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The new alias</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>onResult</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The result or error</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -439,7 +613,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Returns the account&rsquo;s addresses.</p>
 
                       </div>
                       <div class="declaration">
@@ -449,6 +623,25 @@
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">addresses</span><span class="p">(</span><span class="nv">onResult</span><span class="p">:</span> <span class="p">((</span><span class="kt">Result</span><span class="o">&lt;</span><span class="p">[</span><span class="kt"><a href="../Classes/IOTAAccount/Address.html">Address</a></span><span class="p">],</span> <span class="kt"><a href="../Structs/IOTAResponseError.html">IOTAResponseError</a></span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?)</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>onResult</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The addresses or error</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -466,7 +659,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Return the account&rsquo;s unspent addresses</p>
 
                       </div>
                       <div class="declaration">
@@ -476,6 +669,25 @@
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">unspentAddresses</span><span class="p">(</span><span class="nv">onResult</span><span class="p">:</span> <span class="p">((</span><span class="kt">Result</span><span class="o">&lt;</span><span class="p">[</span><span class="kt"><a href="../Classes/IOTAAccount/Address.html">Address</a></span><span class="p">],</span> <span class="kt"><a href="../Structs/IOTAResponseError.html">IOTAResponseError</a></span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?)</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>onResult</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The list of addresses or error</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -493,7 +705,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Returns the account&rsquo;s spent addresses</p>
 
                       </div>
                       <div class="declaration">
@@ -503,6 +715,25 @@
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">spentAddresses</span><span class="p">(</span><span class="nv">onResult</span><span class="p">:</span> <span class="p">((</span><span class="kt">Result</span><span class="o">&lt;</span><span class="p">[</span><span class="kt"><a href="../Classes/IOTAAccount/Address.html">Address</a></span><span class="p">],</span> <span class="kt"><a href="../Structs/IOTAResponseError.html">IOTAResponseError</a></span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?)</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>onResult</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The list of addresses or error</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -520,7 +751,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Returns the account&rsquo;s unused addresses</p>
 
                       </div>
                       <div class="declaration">
@@ -530,6 +761,25 @@
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">unusedAddress</span><span class="p">(</span><span class="nv">onResult</span><span class="p">:</span> <span class="p">((</span><span class="kt">Result</span><span class="o">&lt;</span><span class="kt"><a href="../Classes/IOTAAccount/Address.html">Address</a></span><span class="p">?,</span> <span class="kt"><a href="../Structs/IOTAResponseError.html">IOTAResponseError</a></span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?)</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>onResult</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The list of addresses or error</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -547,7 +797,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Send funds to the given address.</p>
 
                       </div>
                       <div class="declaration">
@@ -558,6 +808,61 @@
 
                         </div>
                       </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>address</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The bech32 string of the transfer address</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>amount</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The transfer amount</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>options</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The transfer options</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>onResult</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The result or error</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
                     </section>
                   </div>
                 </li>
@@ -566,7 +871,7 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2021 <a class="link" href="https://github.com/pascalbros/iota-wallet.rs-swift-binding" target="_blank" rel="external noopener">Pasquale Ambrosini</a>. All rights reserved. (Last updated: 2021-11-02)</p>
+          <p>&copy; 2021 <a class="link" href="https://github.com/pascalbros/iota-wallet.rs-swift-binding" target="_blank" rel="external noopener">Pasquale Ambrosini</a>. All rights reserved. (Last updated: 2021-11-19)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.1</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
         </section>
       </article>
