@@ -1,81 +1,81 @@
 import Foundation
 
 // MARK: - TransferResponsePayload
-struct TransferResponse: Codable {
-    let id: String
-    let version: Int
-    let parents: [String]
-    let payloadLength: Int
-    let payload: TransferPayload
-    let timestamp: String
-    let nonce: Int
-    let broadcasted: Bool
-    let reattachmentMessageID: String?
+public struct TransferResponse: Codable {
+    public let id: String
+    public let version: Int
+    public let parents: [String]
+    public let payloadLength: Int
+    public let payload: TransferPayload
+    public let timestamp: String
+    public let nonce: Int
+    public let broadcasted: Bool
+    public let reattachmentMessageID: String?
 
-    enum CodingKeys: String, CodingKey {
+    public enum CodingKeys: String, CodingKey {
         case id, version, parents, payloadLength, payload, timestamp, nonce, broadcasted
         case reattachmentMessageID = "reattachmentMessageId"
     }
 }
 
 // MARK: - TransferPayload
-struct TransferPayload: Codable {
-    let type: String
-    let data: TransferPayloadData
+public struct TransferPayload: Codable {
+    public let type: String
+    public let data: TransferPayloadData
 }
 
 // MARK: - TransferPayloadData
-struct TransferPayloadData: Codable {
-    let essence: TransferEssence
-    let unlockBlocks: [TransferUnlockBlock]
+public struct TransferPayloadData: Codable {
+    public let essence: TransferEssence
+    public let unlockBlocks: [TransferUnlockBlock]
 
-    enum CodingKeys: String, CodingKey {
+    public enum CodingKeys: String, CodingKey {
         case essence
         case unlockBlocks = "unlock_blocks"
     }
 }
 
 // MARK: - TransferEssence
-struct TransferEssence: Codable {
-    let type: String
-    let data: TransferEssenceData
+public struct TransferEssence: Codable {
+    public let type: String
+    public let data: TransferEssenceData
 }
 
 // MARK: - TransferEssenceData
-struct TransferEssenceData: Codable {
-    let inputs: [TransferInput]
-    let outputs: [TransferOutput]
-    //let payload: String?
-    let dataInternal, incoming: Bool
-    let value, remainderValue: Int
+public struct TransferEssenceData: Codable {
+    public let inputs: [TransferInput]
+    public let outputs: [TransferOutput]
+    //public let payload: String?
+    public let dataInternal, incoming: Bool
+    public let value, remainderValue: Int
 
-    enum CodingKeys: String, CodingKey {
-        case inputs, outputs, payload
+    public enum CodingKeys: String, CodingKey {
+        case inputs, outputs
         case dataInternal = "internal"
         case incoming, value, remainderValue
     }
 }
 
 // MARK: - TransferInput
-struct TransferInput: Codable {
-    let type: String
-    let data: TransferInputData
+public struct TransferInput: Codable {
+    public let type: String
+    public let data: TransferInputData
 }
 
 // MARK: - TransferInputData
-struct TransferInputData: Codable {
-    let input: String
-    let metadata: TransferMetadata
+public struct TransferInputData: Codable {
+    public let input: String
+    public let metadata: TransferMetadata
 }
 
 // MARK: - TransferMetadata
-struct TransferMetadata: Codable {
-    let transactionID, messageID: String
-    let index, amount: Int
-    let isSpent: Bool
-    let address, kind: String
+public struct TransferMetadata: Codable {
+    public let transactionID, messageID: String
+    public let index, amount: Int
+    public let isSpent: Bool
+    public let address, kind: String
 
-    enum CodingKeys: String, CodingKey {
+    public enum CodingKeys: String, CodingKey {
         case transactionID = "transactionId"
         case messageID = "messageId"
         case index, amount, isSpent, address, kind
@@ -83,35 +83,35 @@ struct TransferMetadata: Codable {
 }
 
 // MARK: - TransferOutput
-struct TransferOutput: Codable {
-    let type: String
-    let data: TransferOutputData
+public struct TransferOutput: Codable {
+    public let type: String
+    public let data: TransferOutputData
 }
 
 // MARK: - TransferOutputData
-struct TransferOutputData: Codable {
-    let address: String
-    let amount: Int
-    let remainder: Bool
+public struct TransferOutputData: Codable {
+    public let address: String
+    public let amount: Int
+    public let remainder: Bool
 }
 
 // MARK: - TransferUnlockBlock
-struct TransferUnlockBlock: Codable {
-    let type: String
-    let data: TransferUnlockBlockData
+public struct TransferUnlockBlock: Codable {
+    public let type: String
+    public let data: TransferUnlockBlockData
 }
 
 // MARK: - TransferUnlockBlockData
-struct TransferUnlockBlockData: Codable {
-    let type: String
-    let data: TransferData
+public struct TransferUnlockBlockData: Codable {
+    public let type: String
+    public let data: TransferData
 }
 
 // MARK: - TransferDataData
-struct TransferData: Codable {
-    let publicKey, signature: [Int]
+public struct TransferData: Codable {
+    public let publicKey, signature: [Int]
 
-    enum CodingKeys: String, CodingKey {
+    public enum CodingKeys: String, CodingKey {
         case publicKey = "public_key"
         case signature
     }
