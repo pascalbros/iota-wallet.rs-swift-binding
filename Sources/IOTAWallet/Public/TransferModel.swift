@@ -8,7 +8,7 @@ public struct TransferResponse: Codable {
     public let payloadLength: Int
     public let payload: TransferPayload
     public let timestamp: String
-    public let nonce: Int
+    public let nonce: Decimal
     public let broadcasted: Bool
     public let reattachmentMessageID: String?
 
