@@ -170,7 +170,7 @@ extension IOTAAccount {
     ///   - amount: The transfer amount
     ///   - options: The transfer options
     ///   - onResult: The result or error
-    public func sendTransfer(address: String, amount: Int, options: TransferOptions? = nil, onResult: ((Result<Bool, IOTAResponseError>) -> Void)?) {
+    public func sendTransfer(address: String, amount: Int, options: TransferOptions? = nil, onResult: ((Result<TransferResponse, IOTAResponseError>) -> Void)?) {
         var currentOptions: TransferOptions? = options
         var transfer: [String: Any] = ["address": address, "amount": amount]
         if currentOptions == nil {
@@ -182,8 +182,11 @@ extension IOTAAccount {
                                                    payload: ["accountId": id,
                                                              "transfer": transfer
                                                             ]) { result in
-            let isError = result.decodedResponse?.isError ?? false
-            onResult?(isError ? .failure(IOTAResponseError.decode(from: result)) : .success(true))
+            if let output = WalletResponse<TransferResponse>.decode(result)?.payload {
+                onResult?(.success(output))
+            } else {
+                onResult?(.failure(IOTAResponseError.decode(from: result)))
+            }
         }
     }
 }
