@@ -20,7 +20,7 @@ let package = Package(
             linkerSettings: [LinkerSetting.linkedFramework("Security"), LinkerSetting.linkedLibrary("c++")]),
         .binaryTarget(
             name: "IOTAWalletInternal",
-            url: "https://github.com/iotaledger/wallet-ios-internal/releases/download/v0.1.1/IOTAWalletInternal-v0.1.1.zip",
+            url: "https://github.com/iotaledger/wallet-ios-internal/releases/download/v0.2.0/IOTAWalletInternal-v0.2.0.zip",
             checksum: "cf0b135e06a54df38258e6947bd65089055f5546ee6aca528e060d068f1c7cee"
         ),
         .testTarget(
