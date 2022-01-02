@@ -21,7 +21,7 @@ let package = Package(
         .binaryTarget(
             name: "IOTAWalletInternal",
             url: "https://github.com/iotaledger/wallet-ios-internal/releases/download/v0.2.0/IOTAWalletInternal-v0.2.0.zip",
-            checksum: "cf0b135e06a54df38258e6947bd65089055f5546ee6aca528e060d068f1c7cee"
+            checksum: "bd63862dfaf773d3f4ac9c2ced5fad51d74c3cd97d5e0d2aff1d5c25306a98d1"
         ),
         .testTarget(
             name: "IOTAWalletTests",
