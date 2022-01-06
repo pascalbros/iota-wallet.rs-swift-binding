@@ -2,6 +2,11 @@
 
 import PackageDescription
 
+var dependencies: [Target.Dependency] = ["IOTAWalletInternal", "_IOTAWallet"]
+#if targetEnvironment(simulator)
+dependencies = []
+#endif
+
 let package = Package(
     name: "IOTAWallet",
     platforms: [.iOS(.v12), .macOS(.v10_10)],
@@ -16,7 +21,7 @@ let package = Package(
         .systemLibrary(name: "_IOTAWallet", pkgConfig: nil),
         .target(
             name: "IOTAWallet",
-            dependencies: ["IOTAWalletInternal", "_IOTAWallet"],
+            dependencies: dependencies,
             linkerSettings: [LinkerSetting.linkedFramework("Security"), LinkerSetting.linkedLibrary("c++")]),
         .binaryTarget(
             name: "IOTAWalletInternal",
