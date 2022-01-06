@@ -3,8 +3,11 @@
 import PackageDescription
 
 var dependencies: [Target.Dependency] = ["IOTAWalletInternal", "_IOTAWallet"]
+var targets = ["IOTAWallet", "IOTAWalletInternal"]
+
 #if targetEnvironment(simulator)
 dependencies = []
+targets = ["IOTAWallet"]
 #endif
 
 let package = Package(
