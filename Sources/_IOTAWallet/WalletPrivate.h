@@ -1,9 +1,3 @@
-//
-//  WalletPrivate.h
-//  IOTAWallet
-//
-//  Created by Pasquale Ambrosini on 09/10/21.
-//
-
+#if !TARGET_OS_SIMULATOR
 #import <IOTAWalletInternal/IOTAWalletInternal.h>
-
+#endif
