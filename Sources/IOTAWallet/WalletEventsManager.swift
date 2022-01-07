@@ -1,7 +1,5 @@
 import Foundation
-#if !targetEnvironment(simulator)
 import _IOTAWallet
-#endif
 
 private var walletsCallbacks: [String: WalletEventsManagerCallbacks] = Dictionary()
 
@@ -52,17 +50,13 @@ class WalletEventsManager {
             stop()
         }
         setup()
-        #if !targetEnvironment(simulator)
         iota_initialize(onMessage(_:), identifier.pointerValue, storagePath.pointerValue)
-        #endif
         isRunning = true
     }
     
     func stop() {
         guard isRunning else { return }
-        #if !targetEnvironment(simulator)
         iota_destroy(identifier.pointerValue)
-        #endif
         flushCommands()
         isRunning = false
     }
@@ -75,9 +69,7 @@ class WalletEventsManager {
             return
         }
         callbacks.callbacks[currentId] = callback
-        #if !targetEnvironment(simulator)
         iota_send_message(json)
-        #endif
     }
     
     func flushCommands() {
