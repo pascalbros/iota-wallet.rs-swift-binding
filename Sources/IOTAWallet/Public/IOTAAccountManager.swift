@@ -4,14 +4,18 @@ import Foundation
 public class IOTAAccountManager {
     
     fileprivate var storagePath: String
+    fileprivate var nodeURL: String
+    fileprivate var secretManager: String
     fileprivate(set) var walletManager: WalletEventsManager?
     
     /// Creates a new instance of the `IOTAAccountManager`.
     /// - Parameters:
     ///   - storagePath: The path where the database file will be saved
     ///   - startsAutomatically: Starts automatically if it is set to `true`. Default `true`
-    public init(storagePath: String? = nil, startsAutomatically: Bool = true) {
+    public init(storagePath: String? = nil, secretManager: String, nodeURL: String, startsAutomatically: Bool = true) {
         self.storagePath = storagePath ?? URL.libraryDirectory.path
+        self.secretManager = secretManager
+        self.nodeURL = nodeURL
         if startsAutomatically {
             start()
         }
@@ -26,8 +30,7 @@ public class IOTAAccountManager {
     /// Starts the manager, does nothing if it is already started.
     public func start() {
         if walletManager?.isRunning ?? false { return }
-        walletManager = WalletEventsManager()
-        walletManager?.start(storagePath: self.storagePath)
+        walletManager = WalletEventsManager(storagePath: storagePath, secretManager: secretManager, nodeUrl: nodeURL)
     }
     
     /// Close the connection, stops the polling and release the inner instance
@@ -52,17 +55,14 @@ public class IOTAAccountManager {
     
     /// Changes the Stronghold password.
     /// - Parameters:
-    ///   - currentPassword: The current password
     ///   - newPassword: The new password
     ///   - onResult: The result or error
-    public func changeStrongholdPassword(currentPassword: String,
-                                         newPassword: String,
+    public func changeStrongholdPassword(_ newPassword: String,
                                          onResult: ((Result<Bool, IOTAResponseError>) -> Void)? = nil) {
         walletManager?.sendCommand(id: "ChangeStrongholdPassword",
                                    cmd: "ChangeStrongholdPassword",
                                    payload: [
-                                    "currentPassword": currentPassword,
-                                    "newPassword": newPassword]) { result in
+                                    "password": newPassword]) { result in
             let isError = result.decodedResponse?.isError ?? false
             onResult?(isError ? .failure(IOTAResponseError.decode(from: result)) : .success(true))
         }
@@ -71,8 +71,8 @@ public class IOTAAccountManager {
     /// Gets the current Stronghold status.
     /// - Parameter onResult: The result or error
     public func strongholdStatus(onResult: ((Result<StrongholdStatus, IOTAResponseError>) -> Void)? = nil) {
-        walletManager?.sendCommand(id: "GetStrongholdStatus",
-                                   cmd: "GetStrongholdStatus",
+        walletManager?.sendCommand(id: "IsStrongholdPasswordAvailable",
+                                   cmd: "IsStrongholdPasswordAvailable",
                                    payload: nil) { result in
             guard let onResult = onResult else { return }
             if let response = WalletResponse<StrongholdStatus>.decode(result)?.payload {
@@ -102,11 +102,12 @@ public class IOTAAccountManager {
                                                    onResult: ((Result<Bool, IOTAResponseError>) -> Void)? = nil) {
         walletManager?.sendCommand(id: "SetStrongholdPasswordClearInterval",
                                    cmd: "SetStrongholdPasswordClearInterval",
-                                   payload: [
-                                    "secs": interval,
-                                    "nanos": 0
-                                   ]) { result in
-            let isError = result.decodedResponse?.isError ?? false
+                                   payload: interval * 1000) { result in
+           guard let decodedResult = result.decodedResponse else {
+               onResult?(.failure(IOTAResponseError(type: "Generic", payload: .init(type: "Generic", error: result))))
+               return
+           }
+            let isError = decodedResult.isError
             onResult?(isError ? .failure(IOTAResponseError.decode(from: result)) : .success(true))
         }
     }
@@ -128,14 +129,12 @@ public class IOTAAccountManager {
     /// Stores a mnemonic for the given signer type.
     /// - Parameters:
     ///   - mnemonic: The provided mnemonic
-    ///   - signer: The signer
     ///   - onResult: The result or error
     public func storeMnemonic(mnemonic: String,
-                              signer: SignerType,
                               onResult: ((Result<Bool, IOTAResponseError>) -> Void)? = nil) {
         walletManager?.sendCommand(id: "StoreMnemonic",
                                    cmd: "StoreMnemonic",
-                                   payload: ["mnemonic": mnemonic, "signerType": ["type": signer.rawValue]]) { result in
+                                   payload: mnemonic) { result in
             let isError = result.decodedResponse?.isError ?? false
             onResult?(isError ? .failure(IOTAResponseError.decode(from: result)) : .success(true))
         }

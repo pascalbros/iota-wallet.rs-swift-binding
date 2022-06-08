@@ -18,10 +18,10 @@ final class IOTAAccountTests: XCTestCase {
     }
     
     func newAccountPreamble(onResult: @escaping (IOTAAccount) -> Void) {
-        let accountManager = IOTAAccountManager(storagePath: storagePath)
+        let accountManager = IOTAAccountManager(storagePath: storagePath, secretManager: secretManager, nodeURL: nodeUrl)
         currentAccountManager = accountManager
         accountManager.setStrongholdPassword(password)
-        accountManager.storeMnemonic(mnemonic: mnemonic, signer: .stronghold)
+        accountManager.storeMnemonic(mnemonic: mnemonic)
         accountManager.getAccount(alias: alias) { result in
             if let account = try? result.get() {
                 onResult(account)

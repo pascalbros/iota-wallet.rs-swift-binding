@@ -45,30 +45,8 @@ public enum SignerType: String {
     case stronghold = "Stronghold"
 }
 
-/// The IOTAAccount that defines a IOTA account.
-public class IOTAAccount: Decodable {
-    
-    /// The address associated to an account.
-    public struct Address: Decodable, Hashable {
-        
-        /// The address.
-        public let address: String
-        
-        /// The balance of the address.
-        public let balance: Int
-        
-        /// The index of the address.
-        public let keyIndex: Int
-        
-        /// The outputs associated to the address.
-        public let outputs: [String: AddressOutput]?
-        
-        /// The equatable function.
-        /// - Returns: The equality between two addresses
-        public static func == (lhs: Address, rhs: Address) -> Bool {
-            return lhs.address == rhs.address
-        }
-    }
+/// The address associated to an account.
+public struct IOTAAddress: Decodable, Hashable {
     
     /// The address output for a transaction.
     public struct AddressOutput: Decodable, Hashable {
@@ -92,19 +70,57 @@ public class IOTAAccount: Decodable {
         public let isSpent: Bool?
     }
     
+    /// The address.
+    public let address: String
+    
+    /// The balance of the address.
+    public let balance: Int
+    
+    /// The index of the address.
+    public let keyIndex: Int
+    
+    /// The outputs associated to the address.
+    public let outputs: [String: AddressOutput]?
+    
+    /// The equatable function.
+    /// - Returns: The equality between two addresses
+    public static func == (lhs: IOTAAddress, rhs: IOTAAddress) -> Bool {
+        return lhs.address == rhs.address
+    }
+}
+
+/// The IOTAAccount that defines a IOTA account.
+public class IOTAAccount: Decodable {
+    
+    /// The address associated to an account.
+    public struct Address: Decodable, Hashable {
+        
+        /// The address.
+        public let address: String
+        
+        /// The index of the address.
+        public let keyIndex: Int
+        
+        /// The equatable function.
+        /// - Returns: The equality between two addresses
+        public static func == (lhs: Address, rhs: Address) -> Bool {
+            return lhs.address == rhs.address
+        }
+    }
+    
     /// The ID for the output.
-    public let id: String
+    public var id: String { alias }
     
     /// The alias.
     public let alias: String
     
     /// The addresses.
-    public internal(set) var addresses: [Address]
+    public internal(set) var publicAddresses: [Address]
     
     weak var accountManager: IOTAAccountManager?
     
     private enum CodingKeys: String, CodingKey {
-        case id, alias, addresses
+        case alias, publicAddresses
     }
 }
 

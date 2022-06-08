@@ -10,7 +10,7 @@ extension IOTAAccount {
                                                    cmd: "CallAccountMethod",
                                                    payload: ["accountId": id, "method": ["name": "SyncAccount", "data": [:]]]) { [weak self] result in
             if let account = WalletResponse<WalletSyncResponse>.decode(result)?.payload {
-                self?.addresses = account.addresses
+                self?.publicAddresses = account.addresses
                 onResult?(.success(true))
             } else {
                 onResult?(.failure(IOTAResponseError.decode(from: result)))
@@ -25,8 +25,8 @@ extension IOTAAccount {
                                                    cmd: "CallAccountMethod",
                                                    payload: ["accountId": id, "method": ["name": "GenerateAddress"]]) { [weak self] result in
             if let address = WalletResponse<IOTAAccount.Address>.decode(result)?.payload {
-                if !(self?.addresses.contains(address) ?? true) {
-                    self?.addresses.append(address)
+                if !(self?.publicAddresses.contains(address) ?? true) {
+                    self?.publicAddresses.append(address)
                 }
                 onResult?(.success(address))
             } else {

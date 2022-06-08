@@ -12,6 +12,12 @@ extension String {
         NSString(string: self).utf8String
     }
     
+    var mutablePointerValue: UnsafeMutablePointer<CChar> {
+        return self.withCString { s in
+            UnsafeMutablePointer(mutating: s)
+        }
+    }
+    
     var decodedResponse: WalletGenericResponse? {
         WalletGenericResponse.decode(self)
     }

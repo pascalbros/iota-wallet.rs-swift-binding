@@ -1,63 +1,95 @@
 import Foundation
 import _IOTAWallet
 
-private var walletsCallbacks: [String: WalletEventsManagerCallbacks] = Dictionary()
-
-private class WalletEventsManagerCallbacks {
-    var callbacks: [String: IotaCallback] = Dictionary()
-    init() { }
+struct ManagerOptions: Codable {
+    var storagePath: String?
+    var clientOptions: String?
+    var secretManager: String?
 }
 
-func onMessage(_ pointer: UnsafePointer<CChar>?) {
-    guard let item = pointer?.stringValue else { return }
-    log(item)
-    guard let decoded = item.decodedResponse else { return }
-    let refId = decoded.id.suffix(8)
-    guard let ref = callbacksRef(id: String(refId)) else { return }
-    guard !decoded.id.isEmpty else { return }
-    guard let callback = ref.callbacks[decoded.id] else { return }
-    DispatchQueue.main.async {
-        callback(item)
+struct IOTANode: Codable {
+    let url: String
+    let auth: String?
+    let disabled: Bool
+}
+
+struct ClientOption: Codable {
+    let localPow: Bool
+    let apiTimeout: WalletDuration
+    let nodes: [IOTANode]
+    
+    var json: String {
+        let json = try! JSONEncoder().encode(self)
+        return String(data: json, encoding: .utf8)!
     }
-    ref.callbacks[decoded.id] = nil
+}
+
+struct SecretManager: Codable {
+    let Mnemonic: String
+    
+    var json: String {
+        let json = try! JSONEncoder().encode(self)
+        return String(data: json, encoding: .utf8)!
+    }
+}
+
+func managerOptions(nodeUrl: String = "https://localhost", secretManager: String?, storagePath: String, apiTimeoutInSeconds: Int = 20) -> ManagerOptions {
+    let secretManager = SecretManager(Mnemonic: secretManager!).json
+    let clientOptions = ClientOption(localPow: true, apiTimeout: WalletDuration(secs: apiTimeoutInSeconds, nanos: 0), nodes: [IOTANode(url: nodeUrl, auth: nil, disabled: false)]).json
+    
+    return ManagerOptions(storagePath: storagePath, clientOptions: clientOptions, secretManager: secretManager)
+}
+
+class MessageHandler {
+    var handler: ((String) -> Void)
+    init(_ handler: @escaping ((String) -> Void)) {
+        self.handler = handler
+    }
+}
+
+func onCallback(_ response: UnsafePointer<CChar>?, _ error: UnsafePointer<CChar>?, _ context: UnsafeMutableRawPointer!) {
+    func decodeContext(response: String) {
+        let obj = Unmanaged<MessageHandler>.fromOpaque(context).takeUnretainedValue()
+        obj.handler(response)
+    }
+    guard let response = response?.stringValue ?? error?.stringValue else {
+        decodeContext(response: "")
+        return
+    }
+    decodeContext(response: response)
+    log(String(utf8String: response) ?? "")
 }
 
 class WalletEventsManager {
-    
-    static let shared = WalletEventsManager()
-    
     fileprivate(set) var isRunning: Bool = false
-    fileprivate var callbacks = WalletEventsManagerCallbacks()
     fileprivate var hasBeenStarted = false
     fileprivate(set) var storagePath: String = URL.libraryDirectory.path
     fileprivate(set) var identifier: String
     
-    init() {
+    var handler: OpaquePointer?
+    
+    init(storagePath: String = URL.libraryDirectory.path, secretManager: String, nodeUrl: String) {
+        self.storagePath = storagePath
         identifier = WalletEventsManager.generateId(path: storagePath)
+        let json = try! JSONEncoder().encode(managerOptions(nodeUrl: nodeUrl, secretManager: secretManager, storagePath: storagePath))
+        let options = String(data: json, encoding: .utf8)!
+        let errorMessagePointer = String(repeating: " ", count: 1024).mutablePointerValue
+        handler = iota_initialize(options.pointerValue, errorMessagePointer, MemoryLayout<CChar>.size)
+        if handler != nil {
+            isRunning = true
+        }
     }
     
     fileprivate func setup() {
         identifier = WalletEventsManager.generateId(path: storagePath)
-        walletsCallbacks[identifier] = callbacks
     }
     
     static func generateId(path: String) -> String { String("\(path.hashValue)".suffix(8)) }
     
-    func start(storagePath: String = URL.libraryDirectory.path) {
-        if isRunning && storagePath == self.storagePath &&
-            FileManager.default.fileExists(atPath: storagePath) { return }
-        if isRunning {
-            stop()
-        }
-        setup()
-        iota_initialize(onMessage(_:), identifier.pointerValue, storagePath.pointerValue)
-        isRunning = true
-    }
-    
     func stop() {
         guard isRunning else { return }
-        iota_destroy(identifier.pointerValue)
-        flushCommands()
+        guard let handler = handler else { return }
+        iota_destroy(handler)
         isRunning = false
     }
     
@@ -68,16 +100,7 @@ class WalletEventsManager {
             callback("{\"error\": \"serialization-error\"}")
             return
         }
-        callbacks.callbacks[currentId] = callback
-        iota_send_message(json)
+        let messageHandler = Unmanaged.passRetained(MessageHandler(callback))
+        iota_send_message(handler, json.pointerValue, onCallback, messageHandler.toOpaque())
     }
-    
-    func flushCommands() {
-        callbacks.callbacks.removeAll()
-        walletsCallbacks[identifier] = nil
-    }
-}
-
-private func callbacksRef(id: String) -> WalletEventsManagerCallbacks? {
-    walletsCallbacks[id]
 }
