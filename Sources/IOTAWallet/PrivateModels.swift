@@ -16,7 +16,7 @@ struct WalletGenericResponse: Decodable {
 }
 
 struct WalletSyncResponse: Decodable {
-    var addresses: [IOTAAccount.Address]
+    var publicAddresses: [IOTAAccount.Address]
 }
 
 struct WalletDuration: Codable {

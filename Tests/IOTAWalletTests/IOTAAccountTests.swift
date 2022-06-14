@@ -55,10 +55,10 @@ final class IOTAAccountTests: XCTestCase {
         Thread.sleep(forTimeInterval: 1.0)
         let expectation = XCTestExpectation(description: "Generate address")
         newAccountPreamble { account in
-            print(account.addresses)
-            account.generateAddress { addressResponse in
+            print(account.publicAddresses)
+            account.generateAddresses(count: 1) { addressResponse in
                 switch addressResponse {
-                case .success(let result): XCTAssertEqual(result.address, "atoi1qqrch87kr45t763ml0z99930tkgkhv9f8nt0xhumgzg97suqg557g9efuut")
+                case .success(let result): XCTAssertEqual(result.first!.address, "rms1qqutp84pvkfxlpemlgs3nzj5kxn59z2x9npyalasqp87sravlvq3k58nkav")
                 case .failure(let error): XCTFail(error.payload.error)
                 }
                 expectation.fulfill()
@@ -94,21 +94,6 @@ final class IOTAAccountTests: XCTestCase {
                     }
                     expectation.fulfill()
                 }
-            }
-        }
-        wait(for: [expectation], timeout: 3.0)
-    }
-    
-    func testNodeInfo() {
-        Thread.sleep(forTimeInterval: 1.0)
-        let expectation = XCTestExpectation(description: "Node info")
-        newAccountPreamble { account in
-            account.nodeInfo(url: nodeUrl) { balance in
-                switch balance {
-                case .success(let result): print(result)
-                case .failure(let error): XCTFail(error.payload.error)
-                }
-                expectation.fulfill()
             }
         }
         wait(for: [expectation], timeout: 3.0)

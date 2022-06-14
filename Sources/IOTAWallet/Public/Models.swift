@@ -278,3 +278,9 @@ public struct TransferOptions {
         return result
     }
 }
+
+struct IOTABalance: Codable {
+    let total: String
+    let available: String
+    let requiredStorageDeposit: String
+}

@@ -6,7 +6,7 @@ let storagePath = FileManager.default.homeDirectoryForCurrentUser.appendingPathC
 #elseif os(iOS)
 let storagePath = FileManager.default.temporaryDirectory.appendingPathComponent("tmpIOTAWallet", isDirectory: true).path
 #endif
-let nodeUrl = "https://nodes.devnet.iota.org"
+let nodeUrl = "https://api.alphanet.iotaledger.net"
 let secretManager = "acoustic trophy damage hint search taste love bicycle foster cradle brown govern endless depend situate athlete pudding blame question genius transfer van random vast"
 let mnemonic = "season body fog frost focus size journey glimpse size shed blanket jewel wood access kind useful visa peanut midnight extra margin sentence column diesel"
 let mnemonic2 = "clever cross decorate deliver daughter smart evoke clinic furnace quarter wave shine tattoo amazing wrong file dance half obey horror ribbon win person gossip"

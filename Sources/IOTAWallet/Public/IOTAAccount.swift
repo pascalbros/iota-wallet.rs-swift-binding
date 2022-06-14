@@ -8,9 +8,8 @@ extension IOTAAccount {
     public func sync(onResult: ((Result<Bool, IOTAResponseError>) -> Void)?) {
         accountManager?.walletManager?.sendCommand(id: "SyncAccount",
                                                    cmd: "CallAccountMethod",
-                                                   payload: ["accountId": id, "method": ["name": "SyncAccount", "data": [:]]]) { [weak self] result in
-            if let account = WalletResponse<WalletSyncResponse>.decode(result)?.payload {
-                self?.publicAddresses = account.addresses
+                                                   payload: ["accountId": id, "method": ["name": "SyncAccount", "data": [:]]]) { result in
+            if (WalletResponse<IOTABalance>.decode(result)?.payload) != nil {
                 onResult?(.success(true))
             } else {
                 onResult?(.failure(IOTAResponseError.decode(from: result)))
@@ -20,15 +19,13 @@ extension IOTAAccount {
     
     /// Generates a new unused address and returns it.
     /// - Parameter onResult: The address or error
-    public func generateAddress(onResult: ((Result<IOTAAccount.Address, IOTAResponseError>) -> Void)?) {
-        accountManager?.walletManager?.sendCommand(id: "GenerateAddress",
+    public func generateAddresses(count: Int, onResult: ((Result<[IOTAAccount.Address], IOTAResponseError>) -> Void)?) {
+        let count = max(1, count)
+        accountManager?.walletManager?.sendCommand(id: "GenerateAddresses",
                                                    cmd: "CallAccountMethod",
-                                                   payload: ["accountId": id, "method": ["name": "GenerateAddress"]]) { [weak self] result in
-            if let address = WalletResponse<IOTAAccount.Address>.decode(result)?.payload {
-                if !(self?.publicAddresses.contains(address) ?? true) {
-                    self?.publicAddresses.append(address)
-                }
-                onResult?(.success(address))
+                                                   payload: ["accountId": id, "method": ["name": "GenerateAddresses", "data": ["amount":count]]]) { result in
+            if let addresses = WalletResponse<[IOTAAccount.Address]>.decode(result)?.payload {
+                onResult?(.success(addresses))
             } else {
                 onResult?(.failure(IOTAResponseError.decode(from: result)))
             }
@@ -63,28 +60,6 @@ extension IOTAAccount {
         }
     }
     
-    /// Gets information about the node.
-    /// - Parameters:
-    ///   - url: The node url
-    ///   - jwt: The node auth JWT token
-    ///   - username: The node auth username
-    ///   - password: The node auth password
-    ///   - onResult: The node info or error
-    public func nodeInfo(url: String, jwt: String = "", username: String = "", password: String = "", onResult: ((Result<NodeInfoResponse, IOTAResponseError>) -> Void)?) {
-        
-        accountManager?.walletManager?.sendCommand(id: "GetNodeInfo",
-                                                   cmd: "CallAccountMethod",
-                                                   payload: ["accountId": id,
-                                                             "method": ["name": "GetNodeInfo", "data": [url, jwt, [username, password]]]
-                                                            ]) { result in
-            if let nodeInfo = WalletResponse<NodeInfoResponse>.decode(result)?.payload {
-                onResult?(.success(nodeInfo))
-            } else {
-                onResult?(.failure(IOTAResponseError.decode(from: result)))
-            }
-        }
-    }
-    
     /// Updates the account alias.
     /// - Parameters:
     ///   - newAlias: The new alias
@@ -93,7 +68,7 @@ extension IOTAAccount {
         accountManager?.walletManager?.sendCommand(id: "SetAlias",
                                                    cmd: "CallAccountMethod",
                                                    payload: ["accountId": id,
-                                                             "method": ["name": "SetAlias", "data": newAlias]
+                                                             "method": ["name": "SetAlias", "data": ["alias": newAlias]]
                                                             ]) { result in
             let isError = result.decodedResponse?.isError ?? false
             onResult?(isError ? .failure(IOTAResponseError.decode(from: result)) : .success(true))
